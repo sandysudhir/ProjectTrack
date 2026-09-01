@@ -1,0 +1,1082 @@
+[
+  {
+    "test_id": "ARC-001",
+    "category": "ARC",
+    "scenario": "Row with zero bars",
+    "action": "Create a row with no bars, save and reopen",
+    "expected": "Row identity and row-level data persist without a synthetic task.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "ARC-002",
+    "category": "ARC",
+    "scenario": "Row with multiple bars",
+    "action": "Create three bars in one row and edit one",
+    "expected": "Only the selected bar state changes; row-level data remains shared.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "ARC-003",
+    "category": "ARC",
+    "scenario": "Stable identities",
+    "action": "Collapse, sort, filter and reopen",
+    "expected": "UUIDs, stable row numbers and visible bar IDs remain stable.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "ARC-004",
+    "category": "ARC",
+    "scenario": "Project as tree node",
+    "action": "Create three projects and expand one",
+    "expected": "The project is a native expandable node, not duplicated data.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "ARC-005",
+    "category": "ARC",
+    "scenario": "Derived summary node",
+    "action": "Change a descendant start/finish",
+    "expected": "Project/phase/activity summaries update without becoming editable source bars.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "CAL-001",
+    "category": "CAL",
+    "scenario": "Typical weekday",
+    "action": "Add 8 working hours Monday 09:00",
+    "expected": "Finish is Monday 17:00 using split-shift rules.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "CAL-002",
+    "category": "CAL",
+    "scenario": "Split shift",
+    "action": "Start Monday 11:00 with 4h duration",
+    "expected": "Work skips lunch and finishes at 16:00.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "CAL-003",
+    "category": "CAL",
+    "scenario": "Weekend skip",
+    "action": "Start Friday 16:00 with 2h duration",
+    "expected": "Finish is Monday 10:00.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "CAL-004",
+    "category": "CAL",
+    "scenario": "Holiday exception",
+    "action": "Mark Monday non-working",
+    "expected": "Successor and finish dates move to next valid work period.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "CAL-005",
+    "category": "CAL",
+    "scenario": "Working exception",
+    "action": "Mark Saturday working",
+    "expected": "Calendar arithmetic includes Saturday shift.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "CAL-006",
+    "category": "CAL",
+    "scenario": "Base calendar inheritance",
+    "action": "Override one date in derived calendar",
+    "expected": "Only derived calendar changes and inheritance remains intact.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "CAL-007",
+    "category": "CAL",
+    "scenario": "Resource exception",
+    "action": "Resource unavailable on a task workday",
+    "expected": "Bar reschedules unless Ignore Resource Calendars is true.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "CAL-008",
+    "category": "CAL",
+    "scenario": "Fractional day",
+    "action": "Schedule 0.06 day with 8h base day",
+    "expected": "Duration normalizes consistently and round-trips without drift.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "CAL-009",
+    "category": "CAL",
+    "scenario": "Timestamp precision",
+    "action": "Schedule a task starting 13:30",
+    "expected": "Date and time remain exact through save/reopen.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "CAL-010",
+    "category": "CAL",
+    "scenario": "DST/timezone policy",
+    "action": "Open project across DST boundary",
+    "expected": "Published ProjectTrack timezone policy is applied deterministically.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "DEP-001",
+    "category": "DEP",
+    "scenario": "FS link",
+    "action": "Link A finish to B start",
+    "expected": "B starts at first valid working instant after A finish.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "DEP-002",
+    "category": "DEP",
+    "scenario": "SS link",
+    "action": "Link A start to B start",
+    "expected": "B start follows A start plus lag.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "DEP-003",
+    "category": "DEP",
+    "scenario": "FF link",
+    "action": "Link A finish to B finish",
+    "expected": "B finish follows A finish plus lag.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "DEP-004",
+    "category": "DEP",
+    "scenario": "SF link",
+    "action": "Link A start to B finish",
+    "expected": "B finish follows A start plus lag.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "DEP-005",
+    "category": "DEP",
+    "scenario": "Positive lag",
+    "action": "Set FS +2 working days",
+    "expected": "Successor moves by two working days.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "DEP-006",
+    "category": "DEP",
+    "scenario": "Negative lag",
+    "action": "Set FS -1 working day",
+    "expected": "Successor overlaps predecessor by one working day.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "DEP-007",
+    "category": "DEP",
+    "scenario": "Multiple predecessors",
+    "action": "Attach three predecessors",
+    "expected": "Successor honors the controlling predecessor.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "DEP-008",
+    "category": "DEP",
+    "scenario": "Multiple successors",
+    "action": "Move one predecessor",
+    "expected": "All affected successors update.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "DEP-009",
+    "category": "DEP",
+    "scenario": "Cycle rejection",
+    "action": "Attempt A→B→C→A",
+    "expected": "Cycle is rejected, explained and no partial link remains.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "DEP-010",
+    "category": "DEP",
+    "scenario": "Graphical link transaction",
+    "action": "Create link by pointer and undo",
+    "expected": "One undo removes link and restores all downstream dates.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "DEP-011",
+    "category": "DEP",
+    "scenario": "Delete link",
+    "action": "Delete a controlling link",
+    "expected": "Affected Revised dates recalculate under remaining rules.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "DEP-012",
+    "category": "DEP",
+    "scenario": "Link persistence",
+    "action": "Save/reopen linked project",
+    "expected": "Endpoint IDs, type, lag and route semantics persist.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "CON-001",
+    "category": "CON",
+    "scenario": "ASAP",
+    "action": "Create unconstrained task",
+    "expected": "Task anchors at earliest allowed date.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "CON-002",
+    "category": "CON",
+    "scenario": "ALAP",
+    "action": "Create ALAP task",
+    "expected": "Task anchors at latest allowed date from project finish context.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "CON-003",
+    "category": "CON",
+    "scenario": "SNET",
+    "action": "Set Start No Earlier Than",
+    "expected": "Task never starts before constraint.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "CON-004",
+    "category": "CON",
+    "scenario": "SNLT",
+    "action": "Set Start No Later Than",
+    "expected": "Conflict is surfaced when dependencies violate constraint.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "CON-005",
+    "category": "CON",
+    "scenario": "FNET",
+    "action": "Set Finish No Earlier Than",
+    "expected": "Finish honors constraint.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "CON-006",
+    "category": "CON",
+    "scenario": "FNLT",
+    "action": "Set Finish No Later Than",
+    "expected": "Conflict is surfaced when impossible.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "CON-007",
+    "category": "CON",
+    "scenario": "MSO",
+    "action": "Set Must Start On",
+    "expected": "Start is fixed and conflict is explained.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "CON-008",
+    "category": "CON",
+    "scenario": "MFO",
+    "action": "Set Must Finish On",
+    "expected": "Finish is fixed and conflict is explained.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "CON-009",
+    "category": "CON",
+    "scenario": "Constraint vs dependency",
+    "action": "Apply conflicting rules",
+    "expected": "Deterministic precedence and visible conflict are produced.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "TRK-001",
+    "category": "TRK",
+    "scenario": "Scheduled/Revised separation",
+    "action": "Revise an existing bar",
+    "expected": "Scheduled remains unchanged; Revised changes.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "TRK-002",
+    "category": "TRK",
+    "scenario": "Reset Revised",
+    "action": "Revise then reset",
+    "expected": "Revised returns exactly to scheduled per approved transition rules.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "TRK-003",
+    "category": "TRK",
+    "scenario": "Partial progress",
+    "action": "Set 50 percent complete",
+    "expected": "Actual/progress representation follows approved rules.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "TRK-004",
+    "category": "TRK",
+    "scenario": "Complete progress",
+    "action": "Set 100 percent complete",
+    "expected": "Actual finish is populated and remaining work is zero.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "TRK-005",
+    "category": "TRK",
+    "scenario": "Reset Actual",
+    "action": "Enter actuals then reset",
+    "expected": "Actual fields and percent follow approved reset rules.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "TRK-006",
+    "category": "TRK",
+    "scenario": "Status date",
+    "action": "Move status date",
+    "expected": "Late/active classification updates without altering history.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "TRK-007",
+    "category": "TRK",
+    "scenario": "Baseline save",
+    "action": "Save baseline 1",
+    "expected": "All supported baseline fields snapshot atomically.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "TRK-008",
+    "category": "TRK",
+    "scenario": "Multiple baselines",
+    "action": "Save baselines 1, 2 and 10",
+    "expected": "Active baseline switches without data loss.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "TRK-009",
+    "category": "TRK",
+    "scenario": "Clear baseline",
+    "action": "Clear baseline 2",
+    "expected": "Only baseline 2 is removed.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "TRK-010",
+    "category": "TRK",
+    "scenario": "Variance",
+    "action": "Revise after baseline",
+    "expected": "Start/finish/duration/work/cost variances compute correctly.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "TRK-011",
+    "category": "TRK",
+    "scenario": "Tracking persistence",
+    "action": "Save/reopen",
+    "expected": "Scheduled/Revised/Actual/baselines persist exactly.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "SUM-001",
+    "category": "SUM",
+    "scenario": "Earliest/latest roll-up",
+    "action": "Change first and last child dates",
+    "expected": "Summary start and finish update.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "SUM-002",
+    "category": "SUM",
+    "scenario": "Progress roll-up",
+    "action": "Change child progress",
+    "expected": "Summary percent follows approved weighting.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "SUM-003",
+    "category": "SUM",
+    "scenario": "Cost roll-up",
+    "action": "Change descendant costs",
+    "expected": "Summary cost equals qualifying descendant total.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "SUM-004",
+    "category": "SUM",
+    "scenario": "Work roll-up",
+    "action": "Change descendant work",
+    "expected": "Summary work equals qualifying descendant total.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "SUM-005",
+    "category": "SUM",
+    "scenario": "Active count",
+    "action": "Set status date inside child bars",
+    "expected": "Summary active count is correct.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "SUM-006",
+    "category": "SUM",
+    "scenario": "Late count",
+    "action": "Delay two descendants",
+    "expected": "Summary late count is correct.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "SUM-007",
+    "category": "SUM",
+    "scenario": "Collapse/expand",
+    "action": "Collapse and re-expand branch",
+    "expected": "Stable row numbers and prior expansion state remain intact.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "SUM-008",
+    "category": "SUM",
+    "scenario": "Show Level",
+    "action": "Set levels 1, 2, 3 and All",
+    "expected": "Visible tree matches requested outline depth.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "SUM-009",
+    "category": "SUM",
+    "scenario": "Mixed calendars",
+    "action": "Use different child calendars",
+    "expected": "Summary duration follows approved calendar rule.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "SUM-010",
+    "category": "SUM",
+    "scenario": "Project roll-up",
+    "action": "Collapse project to one row",
+    "expected": "Project summary bar/metrics accurately represent descendants.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "CPM-001",
+    "category": "CPM",
+    "scenario": "Simple critical chain",
+    "action": "Build linear dependency chain",
+    "expected": "All chain bars have zero total float.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "CPM-002",
+    "category": "CPM",
+    "scenario": "Parallel paths",
+    "action": "Build short and long paths",
+    "expected": "Only controlling longest path is critical.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "CPM-003",
+    "category": "CPM",
+    "scenario": "Free float",
+    "action": "Add gap before successor",
+    "expected": "Free float is calculated correctly.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "CPM-004",
+    "category": "CPM",
+    "scenario": "Constraint impact",
+    "action": "Add controlling constraint",
+    "expected": "Critical path and float update deterministically.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "CPM-005",
+    "category": "CPM",
+    "scenario": "Mixed calendars",
+    "action": "Use path-specific calendars",
+    "expected": "CPM uses calendar-aware arithmetic.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "CPM-006",
+    "category": "CPM",
+    "scenario": "Priority tie",
+    "action": "Create equal path candidates",
+    "expected": "Approved bar-priority rule selects deterministically.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "CPM-007",
+    "category": "CPM",
+    "scenario": "Critical threshold",
+    "action": "Set near-zero threshold",
+    "expected": "Critical display follows threshold.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "UI-001",
+    "category": "UI",
+    "scenario": "Grid/timeline vertical sync",
+    "action": "Scroll variable-height rows",
+    "expected": "Grid and timeline remain pixel-aligned.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "UI-002",
+    "category": "UI",
+    "scenario": "Timeline density",
+    "action": "Drag date-header spacing to 2x",
+    "expected": "All geometry scales 2x; schedule dates remain unchanged.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "UI-003",
+    "category": "UI",
+    "scenario": "Global row scale",
+    "action": "Increase row scale",
+    "expected": "All rows scale proportionally and bar centers remain aligned.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "UI-004",
+    "category": "UI",
+    "scenario": "Per-row resize",
+    "action": "Resize one row",
+    "expected": "Only that row changes; wrapped text and timeline match.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "UI-005",
+    "category": "UI",
+    "scenario": "Autofit",
+    "action": "Run row/column/view autofit",
+    "expected": "Content becomes readable without schedule mutation.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "UI-006",
+    "category": "UI",
+    "scenario": "Draw bar",
+    "action": "Use Bar tool to drag on row",
+    "expected": "Correct timestamps and style are created.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "UI-007",
+    "category": "UI",
+    "scenario": "Move bar",
+    "action": "Use Arrow tool to drag",
+    "expected": "Correct state changes and dependent preview is clear.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "UI-008",
+    "category": "UI",
+    "scenario": "Resize bar",
+    "action": "Drag left and right edges",
+    "expected": "Start/finish/duration update according to handle.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "UI-009",
+    "category": "UI",
+    "scenario": "Lock tool",
+    "action": "Lock Bar then create three bars",
+    "expected": "Tool remains active until unlocked.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "UI-010",
+    "category": "UI",
+    "scenario": "QuickLook",
+    "action": "Hover a bar",
+    "expected": "Approved fields display without selection change.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "UI-011",
+    "category": "UI",
+    "scenario": "Keyboard navigation",
+    "action": "Use Tab, Shift+Tab and shortcuts",
+    "expected": "Focus order and commands are predictable.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "UI-012",
+    "category": "UI",
+    "scenario": "Invalid target feedback",
+    "action": "Drag link to invalid target",
+    "expected": "Target is rejected with clear visual explanation.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "UI-013",
+    "category": "UI",
+    "scenario": "Undo compound edit",
+    "action": "Move predecessor with successors",
+    "expected": "One undo restores entire transaction.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "UI-014",
+    "category": "UI",
+    "scenario": "View-state persistence",
+    "action": "Save layout and reopen",
+    "expected": "Density, columns, rows, outline and toggles restore.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "MPR-001",
+    "category": "MPR",
+    "scenario": "Projects only",
+    "action": "Open All Projects compact mode",
+    "expected": "Every project is one meaningful summary row.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "MPR-002",
+    "category": "MPR",
+    "scenario": "Selective expansion",
+    "action": "Expand one project",
+    "expected": "Other projects remain collapsed.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "MPR-003",
+    "category": "MPR",
+    "scenario": "Nested expansion",
+    "action": "Expand project, phase and activity",
+    "expected": "Hierarchy drills down in same window.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "MPR-004",
+    "category": "MPR",
+    "scenario": "Expand everything",
+    "action": "Expand all projects and rows",
+    "expected": "One continuous virtualized sequence is produced.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "MPR-005",
+    "category": "MPR",
+    "scenario": "Collapse everything",
+    "action": "Collapse all",
+    "expected": "Returns to project-only rows without identity changes.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "MPR-006",
+    "category": "MPR",
+    "scenario": "Shared timeline",
+    "action": "Display projects with different dates",
+    "expected": "All align correctly on one timeline.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "MPR-007",
+    "category": "MPR",
+    "scenario": "Current work",
+    "action": "Apply Active Now view",
+    "expected": "Active activities across all projects are visible in context.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "MPR-008",
+    "category": "MPR",
+    "scenario": "Separate finishes",
+    "action": "Use independent-finish mode",
+    "expected": "Each project retains its own finish.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "MPR-009",
+    "category": "MPR",
+    "scenario": "Common finish",
+    "action": "Use common-finish mode",
+    "expected": "Approved alignment semantics are applied.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "MPR-010",
+    "category": "MPR",
+    "scenario": "Missing child source",
+    "action": "Remove referenced project file",
+    "expected": "Master reports missing source without data corruption.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "MPR-011",
+    "category": "MPR",
+    "scenario": "Refresh",
+    "action": "Change child project then refresh",
+    "expected": "Master updates according to ownership policy.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "MPR-012",
+    "category": "MPR",
+    "scenario": "Duplicate resource identity",
+    "action": "Consolidate same-named resources",
+    "expected": "Approved matching policy avoids accidental merging.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "RES-001",
+    "category": "RES",
+    "scenario": "Resource record",
+    "action": "Create people/equipment/material records",
+    "expected": "Typed profile fields persist.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "RES-002",
+    "category": "RES",
+    "scenario": "Assignment units",
+    "action": "Assign resource at 50 percent",
+    "expected": "Usage and work buckets reflect 50 percent capacity.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "RES-003",
+    "category": "RES",
+    "scenario": "Over-allocation",
+    "action": "Assign 11h into 8h capacity",
+    "expected": "Overload is detected and contributing bars are shown.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "RES-004",
+    "category": "RES",
+    "scenario": "Resource calendar",
+    "action": "Add resource exception",
+    "expected": "Affected schedule/use updates per rule.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "RES-005",
+    "category": "RES",
+    "scenario": "Ignore resource calendar",
+    "action": "Toggle flag",
+    "expected": "Task switches between resource-constrained and task/project calendar.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "RES-006",
+    "category": "RES",
+    "scenario": "Fixed duration",
+    "action": "Add second resource to fixed-duration task",
+    "expected": "Duration stays fixed and work/units follow approved lock matrix.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "RES-007",
+    "category": "RES",
+    "scenario": "Effort driven",
+    "action": "Double equivalent resources",
+    "expected": "Duration changes according to effort-driven rule.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "RES-008",
+    "category": "RES",
+    "scenario": "Flat contour",
+    "action": "Distribute work",
+    "expected": "Work is uniform across eligible buckets.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "RES-009",
+    "category": "RES",
+    "scenario": "Early peak contour",
+    "action": "Distribute work",
+    "expected": "Approved curve weights earlier buckets.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "RES-010",
+    "category": "RES",
+    "scenario": "Spot allocation",
+    "action": "Override one day",
+    "expected": "Manual bucket overrides contour and total reconciles.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "RES-011",
+    "category": "RES",
+    "scenario": "Overtime",
+    "action": "Exceed regular capacity",
+    "expected": "Regular and overtime work/cost separate correctly.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "RES-012",
+    "category": "RES",
+    "scenario": "Rate override",
+    "action": "Override assignment rate",
+    "expected": "Only that assignment cost uses override.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "RES-013",
+    "category": "RES",
+    "scenario": "Per-use cost",
+    "action": "Assign resource",
+    "expected": "Per-use cost is applied exactly once per policy.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "RES-014",
+    "category": "RES",
+    "scenario": "Cross-project workload",
+    "action": "Assign resource in three projects",
+    "expected": "Global Resource View aggregates all projects.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "PERSIST-001",
+    "category": "PERSIST",
+    "scenario": "Atomic save",
+    "action": "Interrupt save simulation",
+    "expected": "Original remains valid or new version commits atomically.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "PERSIST-002",
+    "category": "PERSIST",
+    "scenario": "Autosave recovery",
+    "action": "Crash after unsaved edits",
+    "expected": "Recovery offers the latest consistent snapshot.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "PERSIST-003",
+    "category": "PERSIST",
+    "scenario": "Schema migration",
+    "action": "Open older fixture",
+    "expected": "Migration is deterministic and creates backup.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "PERSIST-004",
+    "category": "PERSIST",
+    "scenario": "Serialization round trip",
+    "action": "Save/export/import",
+    "expected": "Canonical fields round-trip exactly.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "PERSIST-005",
+    "category": "PERSIST",
+    "scenario": "Undo depth",
+    "action": "Execute 120 edits",
+    "expected": "At least 100 operations remain undoable.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "PERSIST-006",
+    "category": "PERSIST",
+    "scenario": "View vs data undo",
+    "action": "Resize view then edit schedule",
+    "expected": "Undo stacks do not confuse view geometry with domain edits.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "REP-001",
+    "category": "REP",
+    "scenario": "Saved layout",
+    "action": "Save and restore layout",
+    "expected": "Columns, widths, action columns, geometry and toggles restore.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "REP-002",
+    "category": "REP",
+    "scenario": "Filter AST",
+    "action": "Create compound temporal filter",
+    "expected": "Correct bars/rows match with hierarchy semantics.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "REP-003",
+    "category": "REP",
+    "scenario": "Highlight mode",
+    "action": "Apply filter in highlight mode",
+    "expected": "Context remains and matches are emphasized.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "REP-004",
+    "category": "REP",
+    "scenario": "Multi-key sort",
+    "action": "Sort within parent by priority/date",
+    "expected": "Hierarchy remains valid.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "REP-005",
+    "category": "REP",
+    "scenario": "Timeline range",
+    "action": "Save and apply custom range",
+    "expected": "Visible period changes without schedule mutation.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "REP-006",
+    "category": "REP",
+    "scenario": "Report state",
+    "action": "Save full report view",
+    "expected": "All approved view and print properties restore.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "REP-007",
+    "category": "REP",
+    "scenario": "FastStep",
+    "action": "Run multi-command workflow",
+    "expected": "Commands execute as one recoverable transaction.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "REP-008",
+    "category": "REP",
+    "scenario": "Summary graph",
+    "action": "Aggregate count/work/cost by period",
+    "expected": "Buckets and operations match source data.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "REP-009",
+    "category": "REP",
+    "scenario": "Print preview",
+    "action": "Paginate wide Gantt",
+    "expected": "Headers, footers, legends and page breaks are correct.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "REP-010",
+    "category": "REP",
+    "scenario": "Visual objects",
+    "action": "Move, layer and print text/picture/legend",
+    "expected": "Objects preserve z-order and inclusion settings.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "IO-001",
+    "category": "IO",
+    "scenario": "CSV round trip",
+    "action": "Export/import supported table fields",
+    "expected": "Supported values preserve; losses appear in report.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "IO-002",
+    "category": "IO",
+    "scenario": "XLSX round trip",
+    "action": "Export/import hierarchy and dates",
+    "expected": "Supported hierarchy/data preserve.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "IO-003",
+    "category": "IO",
+    "scenario": "Project XML round trip",
+    "action": "Import/export test fixture",
+    "expected": "Supported tasks, links, resources and calendars preserve.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "IO-004",
+    "category": "IO",
+    "scenario": "ICS round trip",
+    "action": "Export/import calendar events",
+    "expected": "Supported dates and labels preserve.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "IO-005",
+    "category": "IO",
+    "scenario": "PDF export",
+    "action": "Export approved report",
+    "expected": "Output is legible and matches preview.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "IO-006",
+    "category": "IO",
+    "scenario": "Clipboard PNG",
+    "action": "Copy visible schedule to PowerPoint/Word",
+    "expected": "High-resolution image pastes correctly.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "IO-007",
+    "category": "IO",
+    "scenario": "Clipboard vector",
+    "action": "Copy SVG/EMF where supported",
+    "expected": "Vector output remains sharp or reports platform limitation.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "IO-008",
+    "category": "IO",
+    "scenario": "Malformed import",
+    "action": "Import invalid file",
+    "expected": "No project corruption; actionable error and report.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "PERF-001",
+    "category": "PERF",
+    "scenario": "10k row scroll",
+    "action": "Open 10k-row fixture and scroll",
+    "expected": "Meets published frame-time threshold.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "PERF-002",
+    "category": "PERF",
+    "scenario": "15k bar zoom",
+    "action": "Zoom/pan large timeline",
+    "expected": "No full-DOM rendering and interaction remains responsive.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "PERF-003",
+    "category": "PERF",
+    "scenario": "25k dependency move",
+    "action": "Move controlling predecessor",
+    "expected": "Affected-subgraph result matches full solver.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "PERF-004",
+    "category": "PERF",
+    "scenario": "2k resource aggregation",
+    "action": "Open Resource View",
+    "expected": "Aggregation meets published latency threshold.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "PERF-005",
+    "category": "PERF",
+    "scenario": "50k assignment load",
+    "action": "Open and filter fixture",
+    "expected": "Memory and latency remain inside published budget.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "PERF-006",
+    "category": "PERF",
+    "scenario": "Cancellation",
+    "action": "Cancel long import/refresh",
+    "expected": "Operation rolls back safely.",
+    "status": "NOT RUN"
+  },
+  {
+    "test_id": "PERF-007",
+    "category": "PERF",
+    "scenario": "Background progress",
+    "action": "Run long operation",
+    "expected": "UI remains responsive and progress is truthful.",
+    "status": "NOT RUN"
+  }
+]

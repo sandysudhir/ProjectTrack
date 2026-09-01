@@ -1,0 +1,155 @@
+[
+  {
+    "gate_id": "G-HANDOFF-00",
+    "phase": "P00",
+    "type": "technical",
+    "authority": "Validation Codex",
+    "blocking": true,
+    "status": "PENDING",
+    "objective": "Prove the repository handoff is complete and internally consistent."
+  },
+  {
+    "gate_id": "G-ARCH-01",
+    "phase": "P01",
+    "type": "technical+human",
+    "authority": "User after validator eligibility",
+    "blocking": true,
+    "status": "PENDING",
+    "objective": "Approve domain architecture, scheduling rules, data ownership and unresolved-decision register before product code."
+  },
+  {
+    "gate_id": "UI-00",
+    "phase": "P01/P02",
+    "type": "ui_ux",
+    "authority": "User only",
+    "blocking": true,
+    "status": "PENDING",
+    "objective": "Approve information architecture, command model, visual direction and All Projects concept before detailed frontend implementation."
+  },
+  {
+    "gate_id": "UI-01",
+    "phase": "P02",
+    "type": "ui_ux",
+    "authority": "User only",
+    "blocking": true,
+    "status": "PENDING",
+    "objective": "Approve the executable desktop shell, navigation, tabs, panes and contextual command structure."
+  },
+  {
+    "gate_id": "G-ENG-02",
+    "phase": "P03",
+    "type": "technical",
+    "authority": "Validation Codex",
+    "blocking": true,
+    "status": "PENDING",
+    "objective": "Prove deterministic calendar, dependency, constraint and full-scheduler correctness."
+  },
+  {
+    "gate_id": "UI-02",
+    "phase": "P04",
+    "type": "ui_ux",
+    "authority": "User only",
+    "blocking": true,
+    "status": "PENDING",
+    "objective": "Approve Schedule View structure, density, hierarchy, compact view and visual fidelity."
+  },
+  {
+    "gate_id": "UI-03",
+    "phase": "P05",
+    "type": "ui_ux",
+    "authority": "User only",
+    "blocking": true,
+    "status": "PENDING",
+    "objective": "Approve direct-manipulation tools, graphical linking, feedback and undo behavior."
+  },
+  {
+    "gate_id": "G-ENG-03",
+    "phase": "P06",
+    "type": "technical",
+    "authority": "Validation Codex",
+    "blocking": true,
+    "status": "PENDING",
+    "objective": "Prove Scheduled/Revised/Actual transitions, baselines, summaries, CPM and persistence."
+  },
+  {
+    "gate_id": "UI-04",
+    "phase": "P07",
+    "type": "ui_ux",
+    "authority": "User only",
+    "blocking": true,
+    "status": "PENDING",
+    "objective": "Approve All Projects compact, selective expansion and expand-everything workflows."
+  },
+  {
+    "gate_id": "G-ENG-04",
+    "phase": "P08",
+    "type": "technical",
+    "authority": "Validation Codex",
+    "blocking": true,
+    "status": "PENDING",
+    "objective": "Prove resource, work, allocation, calendar and cost calculations."
+  },
+  {
+    "gate_id": "UI-05",
+    "phase": "P08",
+    "type": "ui_ux",
+    "authority": "User only",
+    "blocking": true,
+    "status": "PENDING",
+    "objective": "Approve Resource View and cross-project workload interaction."
+  },
+  {
+    "gate_id": "UI-06",
+    "phase": "P06",
+    "type": "ui_ux",
+    "authority": "User only",
+    "blocking": true,
+    "status": "PENDING",
+    "objective": "Approve visual language for Scheduled, Revised, Actual, progress, baseline, critical path and variance."
+  },
+  {
+    "gate_id": "UI-07",
+    "phase": "P09",
+    "type": "ui_ux",
+    "authority": "User only",
+    "blocking": true,
+    "status": "PENDING",
+    "objective": "Approve the wall-calendar view, stacking, labels and editing behavior."
+  },
+  {
+    "gate_id": "UI-08",
+    "phase": "P10",
+    "type": "ui_ux",
+    "authority": "User only",
+    "blocking": true,
+    "status": "PENDING",
+    "objective": "Approve layouts, reports, summary graphs, visual objects and print preview."
+  },
+  {
+    "gate_id": "G-REL-01",
+    "phase": "P11",
+    "type": "technical",
+    "authority": "Validation Codex",
+    "blocking": true,
+    "status": "PENDING",
+    "objective": "Prove supported import/export round trips and compatibility reporting."
+  },
+  {
+    "gate_id": "UI-09",
+    "phase": "P12",
+    "type": "ui_ux",
+    "authority": "User only",
+    "blocking": true,
+    "status": "PENDING",
+    "objective": "Approve the complete integrated desktop experience."
+  },
+  {
+    "gate_id": "G-REL-02",
+    "phase": "P12",
+    "type": "release",
+    "authority": "User after validator eligibility",
+    "blocking": true,
+    "status": "PENDING",
+    "objective": "Approve release candidate after regression, performance, resilience and recovery evidence."
+  }
+]

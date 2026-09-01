@@ -1,0 +1,210 @@
+[
+  {
+    "id": "Q-001",
+    "question": "What exact pointer gesture selects FS/SS/FF/SF during graphical linking?",
+    "impact": "Core interaction and dependency semantics",
+    "decision_gate": "UI-03",
+    "evidence_required": "Record a controlled link-creation experiment for every endpoint combination.",
+    "status": "OPEN"
+  },
+  {
+    "id": "Q-002",
+    "question": "How is lag/lead entered and which unit/calendar governs it?",
+    "impact": "Scheduler correctness",
+    "decision_gate": "G-ENG-02",
+    "evidence_required": "Capture Links tab/editor and run lag/lead experiments.",
+    "status": "OPEN"
+  },
+  {
+    "id": "Q-003",
+    "question": "What happens when a summary bar is moved or resized?",
+    "impact": "Roll-up and edit semantics",
+    "decision_gate": "G-ARCH-01",
+    "evidence_required": "Controlled parent-summary experiment.",
+    "status": "OPEN"
+  },
+  {
+    "id": "Q-004",
+    "question": "Can parent Start/Finish/Duration cells be edited, and how do descendants respond?",
+    "impact": "Hierarchy scheduling",
+    "decision_gate": "G-ARCH-01",
+    "evidence_required": "Controlled parent-cell experiment.",
+    "status": "OPEN"
+  },
+  {
+    "id": "Q-005",
+    "question": "How exactly is summary Duration calculated when child calendars differ?",
+    "impact": "Summary mathematics",
+    "decision_gate": "G-ENG-03",
+    "evidence_required": "Golden schedules with mixed calendars.",
+    "status": "OPEN"
+  },
+  {
+    "id": "Q-006",
+    "question": "What is the weighting basis for summary and project percent complete?",
+    "impact": "Portfolio status",
+    "decision_gate": "G-ENG-03",
+    "evidence_required": "Define and approve work/duration/manual weighting rules.",
+    "status": "OPEN"
+  },
+  {
+    "id": "Q-007",
+    "question": "How are Scheduled, Revised, Actual and baselines placed visually?",
+    "impact": "Tracking UX",
+    "decision_gate": "UI-06",
+    "evidence_required": "Capture source examples or approve original ProjectTrack visual language.",
+    "status": "OPEN"
+  },
+  {
+    "id": "Q-008",
+    "question": "Does Reset Revised also clear Actual and percent complete?",
+    "impact": "State transition correctness",
+    "decision_gate": "G-ENG-03",
+    "evidence_required": "Controlled reset experiment and transition table.",
+    "status": "OPEN"
+  },
+  {
+    "id": "Q-009",
+    "question": "How does the Percent tool derive Actual dates at partial completion?",
+    "impact": "Tracking mathematics",
+    "decision_gate": "G-ENG-03",
+    "evidence_required": "Controlled 25/50/100 percent experiments.",
+    "status": "OPEN"
+  },
+  {
+    "id": "Q-010",
+    "question": "What are the expanded Resource View rows for Percent Work Usage, Work Usage and Assignments?",
+    "impact": "Resource UX and data model",
+    "decision_gate": "UI-05",
+    "evidence_required": "Capture expanded resource view.",
+    "status": "OPEN"
+  },
+  {
+    "id": "Q-011",
+    "question": "What fields and controls exist in the assignment editor?",
+    "impact": "Resource engine",
+    "decision_gate": "G-ENG-04",
+    "evidence_required": "Capture Assignments tab/dialog.",
+    "status": "OPEN"
+  },
+  {
+    "id": "Q-012",
+    "question": "What exact normalized curves define each work contour?",
+    "impact": "Resource allocation",
+    "decision_gate": "G-ENG-04",
+    "evidence_required": "Document source curves or approve ProjectTrack-owned curves.",
+    "status": "OPEN"
+  },
+  {
+    "id": "Q-013",
+    "question": "What precedence do spot allocations have over contour-distributed work?",
+    "impact": "Resource allocation",
+    "decision_gate": "G-ENG-04",
+    "evidence_required": "Controlled assignment fixture.",
+    "status": "OPEN"
+  },
+  {
+    "id": "Q-014",
+    "question": "How is overtime thresholded and distributed?",
+    "impact": "Cost correctness",
+    "decision_gate": "G-ENG-04",
+    "evidence_required": "Formal overtime policy and fixtures.",
+    "status": "OPEN"
+  },
+  {
+    "id": "Q-015",
+    "question": "What is the exact variable-locking matrix for Fixed Duration and effort-driven tasks?",
+    "impact": "Scheduler-resource coupling",
+    "decision_gate": "G-ENG-04",
+    "evidence_required": "Before/after resource experiments.",
+    "status": "OPEN"
+  },
+  {
+    "id": "Q-016",
+    "question": "Can activities be dragged and revised directly in Calendar View?",
+    "impact": "Calendar UX",
+    "decision_gate": "UI-07",
+    "evidence_required": "Controlled calendar drag experiment.",
+    "status": "OPEN"
+  },
+  {
+    "id": "Q-017",
+    "question": "How are overlapping bars stacked in Calendar View?",
+    "impact": "Calendar readability",
+    "decision_gate": "UI-07",
+    "evidence_required": "Dense collision fixture.",
+    "status": "OPEN"
+  },
+  {
+    "id": "Q-018",
+    "question": "Is a consolidated master directly editable or refreshed from child files?",
+    "impact": "Multi-project ownership",
+    "decision_gate": "G-ARCH-01",
+    "evidence_required": "Define ProjectTrack canonical ownership before implementation.",
+    "status": "OPEN"
+  },
+  {
+    "id": "Q-019",
+    "question": "How are conflicts handled when a child project and master projection both change?",
+    "impact": "Data integrity",
+    "decision_gate": "G-ARCH-01",
+    "evidence_required": "Choose source-of-truth and conflict policy.",
+    "status": "OPEN"
+  },
+  {
+    "id": "Q-020",
+    "question": "Can cross-project dependencies be created?",
+    "impact": "Portfolio scheduler",
+    "decision_gate": "G-ARCH-01",
+    "evidence_required": "User decision plus scheduler impact analysis.",
+    "status": "OPEN"
+  },
+  {
+    "id": "Q-021",
+    "question": "Are resources global, project-local, or both, and how are duplicates matched?",
+    "impact": "Cross-project workload",
+    "decision_gate": "G-ARCH-01",
+    "evidence_required": "Approve resource identity strategy.",
+    "status": "OPEN"
+  },
+  {
+    "id": "Q-022",
+    "question": "What does common-finish consolidation do mathematically?",
+    "impact": "Consolidation parity",
+    "decision_gate": "G-ENG-03",
+    "evidence_required": "Controlled two-project consolidation experiment.",
+    "status": "OPEN"
+  },
+  {
+    "id": "Q-023",
+    "question": "Which alternative master groupings beyond By Project are required for V1?",
+    "impact": "Scope and UX",
+    "decision_gate": "UI-00",
+    "evidence_required": "User selects among workstream/resource/department/status/chronological.",
+    "status": "OPEN"
+  },
+  {
+    "id": "Q-024",
+    "question": "What is the exact FastSteps command vocabulary and rollback behavior?",
+    "impact": "Automation",
+    "decision_gate": "UI-08",
+    "evidence_required": "Capture Define dialog or approve ProjectTrack safe command list.",
+    "status": "OPEN"
+  },
+  {
+    "id": "Q-025",
+    "question": "What exact state is retained by Layouts, Reports, Filters, Sorts and Ranges?",
+    "impact": "View persistence",
+    "decision_gate": "UI-08",
+    "evidence_required": "Capture definition dialogs and persistence tests.",
+    "status": "OPEN"
+  },
+  {
+    "id": "Q-026",
+    "question": "Which MPP library, if any, is reliable and legally suitable?",
+    "impact": "Interoperability",
+    "decision_gate": "G-REL-01",
+    "evidence_required": "Technical/library assessment; XML fallback remains mandatory.",
+    "status": "OPEN"
+  }
+]
