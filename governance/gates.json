@@ -14,8 +14,12 @@
     "type": "technical+human",
     "authority": "User after validator eligibility",
     "blocking": true,
-    "status": "PENDING",
-    "objective": "Approve domain architecture, scheduling rules, data ownership and unresolved-decision register before product code."
+    "status": "APPROVED",
+    "objective": "Approve domain architecture, scheduling rules, data ownership and unresolved-decision register before product code.",
+    "approved_at": "2026-09-02",
+    "approved_commit": "4a773b4093f9db825a0651de4f436458030bad7d",
+    "approval_record": "governance/approvals/G-ARCH-01_2026-09-02.md",
+    "notes": "Explicit user approval recorded. G-HANDOFF-00 remains independently pending."
   },
   {
     "gate_id": "UI-00",
@@ -23,8 +27,12 @@
     "type": "ui_ux",
     "authority": "User only",
     "blocking": true,
-    "status": "PENDING",
-    "objective": "Approve information architecture, command model, visual direction and All Projects concept before detailed frontend implementation."
+    "status": "APPROVED",
+    "objective": "Approve information architecture, command model, visual direction and All Projects concept before detailed frontend implementation.",
+    "approved_at": "2026-09-02",
+    "approved_commit": "4a773b4093f9db825a0651de4f436458030bad7d",
+    "approval_record": "governance/approvals/UI-00_2026-09-02.md",
+    "notes": "Explicit user approval recorded. UI-01 remains the next frontend approval gate."
   },
   {
     "gate_id": "UI-01",

@@ -2,6 +2,8 @@
 
 These gates prevent Codex from building a technically functional but operationally wrong interface. **Only the user may approve UI-00 through UI-09.**
 
+> **Current status (2026-09-02):** `UI-00 APPROVED` by the user. The next frontend gate is `UI-01`. UI-00 approval covers direction and information architecture; it does not approve the future executable shell.
+
 ## Universal evidence required at every UI gate
 
 1. Exact commit SHA and runnable instructions/build.

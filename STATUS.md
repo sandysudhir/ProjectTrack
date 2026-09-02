@@ -1,11 +1,14 @@
 # ProjectTrack Status
 
-- **Current authorised phase:** P00 Handoff Validation, followed by P01 Architecture/Decision Closure.
-- **Product implementation:** NOT STARTED.
-- **G-HANDOFF-00:** PENDING independent validation.
-- **G-ARCH-01:** PENDING.
-- **UI-00:** PENDING user approval.
-- **Next permitted implementation action:** validate package integrity, then create architecture/interaction decision documents and low-fidelity UI-00 evidence only.
-- **Prohibited until approval:** production frontend, scheduler implementation, resource engine implementation, import/export implementation.
-
-Update this file at every checkpoint. Never delete historical checkpoint records.
+- **Status date:** 2026-09-02
+- **Human approvals recorded:** `G-ARCH-01 = APPROVED`; `UI-00 = APPROVED`.
+- **Approval records:** `governance/approvals/G-ARCH-01_2026-09-02.md` and `governance/approvals/UI-00_2026-09-02.md`.
+- **G-HANDOFF-00:** PENDING independent Validation Codex verdict.
+- **Current authorised sequence:** complete P00 independent handoff validation; on PASS, execute P02 Desktop Shell and Navigation only.
+- **P01 human gate state:** CLOSED by explicit user approval of the committed architecture and information-architecture direction.
+- **Product implementation:** BLOCKED only until `G-HANDOFF-00` passes; after that, P02 is authorised.
+- **Next frontend gate:** `UI-01`.
+- **Next permitted implementation deliverable:** executable desktop shell with All Projects and individual-project tabs, Schedule/Resource/Calendar switching, contextual command regions, split panes, status/focus/shortcut framework, and deterministic empty/loading/error states.
+- **Mandatory stop:** commit P02 evidence and stop at UI-01. Do not begin P03 until UI-01 is explicitly approved.
+- **Still prohibited:** scheduler engine, resource engine, tracking engine, import/export, or later-phase implementation before their phase prerequisites.
+- **Remote handoff status:** no dedicated GitHub remote or Codex task has been confirmed by this repository package itself.

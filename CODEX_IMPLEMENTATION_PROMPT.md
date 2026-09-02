@@ -8,12 +8,15 @@ You are not authorised to improvise product semantics or skip approval gates. Tr
 
 ## Immediate instruction
 
-1. Read `AGENTS.md` and all documents it names.
+1. Read `AGENTS.md`, `STATUS.md`, `CODEX_NEXT_TASK.md`, and all documents named there.
 2. Run `python scripts/validate_handoff.py`.
-3. Inspect `STATUS.md`.
-4. Perform only P00/P01 work. Do **not** write production product code until both `G-ARCH-01` and `UI-00` are explicitly approved by the user.
-5. Create a work packet and a checkpoint for every coherent task.
-6. Use `CODEX_VALIDATION_PROMPT.md` as a separate independent validation task; do not self-author its final verdict.
+3. Verify the immutable approval records for `G-ARCH-01` and `UI-00`, both approved by the user on 2026-09-02.
+4. Do not treat the package self-check as the independent `G-HANDOFF-00` verdict. A separate Validation Codex must validate the exact commit first.
+5. After `G-HANDOFF-00 = PASS`, execute **P02 Desktop Shell and Navigation only**.
+6. Do not implement the scheduler, resource engine, tracking engine, persistence migrations, import/export, or any phase beyond P02.
+7. Create a work packet and checkpoint for every coherent task.
+8. Produce the complete UI-01 evidence bundle, request independent eligibility validation, commit, and stop for explicit user approval.
+9. Use `CODEX_VALIDATION_PROMPT.md` as a separate validation task; do not self-author its final verdict.
 
 ## Mission
 

@@ -31,3 +31,7 @@
 ## Completion condition
 
 P01 is not complete until the user records explicit approvals. Product code remains prohibited until then.
+
+## Closure update — 2026-09-02
+
+The user explicitly approved `G-ARCH-01` and `UI-00`. Those human decisions are recorded under `governance/approvals/`. The independent `G-HANDOFF-00` verdict is still pending. This packet is superseded for forward execution by `P00_VALIDATION_THEN_P02_DESKTOP_SHELL.md`.

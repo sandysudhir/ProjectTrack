@@ -33,4 +33,12 @@ No product code may be written until **G-ARCH-01** and **UI-00** have explicit a
 
 ## Current permitted action
 
-Only **P00 Handoff Validation** and **P01 Architecture/Decision Closure** are authorised. Do not scaffold the production frontend or scheduler until the required approvals exist.
+The user explicitly approved `G-ARCH-01` and `UI-00` on 2026-09-02. Approval records are stored under `governance/approvals/`.
+
+The next controlled sequence is:
+
+1. Validation Codex validates the exact committed package and issues `G-HANDOFF-00`.
+2. If and only if that verdict is PASS, Implementation Codex executes P02 Desktop Shell and Navigation.
+3. P02 commits an evidence bundle and stops at `UI-01` for user approval.
+
+Use `CODEX_NEXT_TASK.md` as the current handoff instruction. Do not begin P03 or any scheduler implementation before UI-01 is approved.
