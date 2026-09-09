@@ -11,4 +11,4 @@
 - **Next permitted implementation deliverable:** executable desktop shell with All Projects and individual-project tabs, Schedule/Resource/Calendar switching, contextual command regions, split panes, status/focus/shortcut framework, and deterministic empty/loading/error states.
 - **Mandatory stop:** commit P02 evidence and stop at UI-01. Do not begin P03 until UI-01 is explicitly approved.
 - **Still prohibited:** scheduler engine, resource engine, tracking engine, import/export, or later-phase implementation before their phase prerequisites.
-- **Remote handoff status:** no dedicated GitHub remote or Codex task has been confirmed by this repository package itself.
+- **Remote handoff status:** dedicated GitHub repository confirmed at `https://github.com/sandysudhir/ProjectTrack`.
