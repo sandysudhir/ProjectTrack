@@ -51,4 +51,4 @@ The shell follows the approved light, high-density desktop direction: top projec
 
 ## Validator eligibility report
 
-Pending independent Validation Codex review against the exact P02 commit.
+`governance/validation_reports/UI-01_efc501206fa5e61055fcee6644267afda5105d0d.md` — PASS, ELIGIBLE FOR USER REVIEW.
