@@ -5,8 +5,10 @@
     "type": "technical",
     "authority": "Validation Codex",
     "blocking": true,
-    "status": "PENDING",
-    "objective": "Prove the repository handoff is complete and internally consistent."
+    "status": "PASS",
+    "objective": "Prove the repository handoff is complete and internally consistent.",
+    "validation_report": "governance/validation_reports/G-HANDOFF-00_b5df2a6198305d6cc49e946af35e8bb97ab3a0b3.md",
+    "validated_commit": "b5df2a6198305d6cc49e946af35e8bb97ab3a0b3"
   },
   {
     "gate_id": "G-ARCH-01",
