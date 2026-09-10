@@ -30,3 +30,8 @@ No P0 behavior may be silently implemented while its question is OPEN.
 | Q-024 | What is the exact FastSteps command vocabulary and rollback behavior? | Automation | UI-08 | Capture Define dialog or approve ProjectTrack safe command list. | OPEN |
 | Q-025 | What exact state is retained by Layouts, Reports, Filters, Sorts and Ranges? | View persistence | UI-08 | Capture definition dialogs and persistence tests. | OPEN |
 | Q-026 | Which MPP library, if any, is reliable and legally suitable? | Interoperability | G-REL-01 | Technical/library assessment; XML fallback remains mandatory. | OPEN |
+
+
+## UI-01R reconciliation note
+
+The shell exposes screenshot-confirmed commands and dialog locations while preserving unresolved behavior. No question in this register was converted into a scheduling, resource, tracking, persistence, import/export, report, or consolidation rule during UI-01R.

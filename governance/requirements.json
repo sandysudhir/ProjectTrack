@@ -1,5 +1,6 @@
 [
   {
+  "ui01r_reconciliation": {"status":"PENDING USER APPROVAL","original_screenshots_reviewed":41,"manifest_files_reviewed":52,"unmapped_screenshots":0,"unmapped_commands":0},
     "requirement_id": "ARC-01",
     "capability": "Row separate from Bar",
     "priority": "P0",

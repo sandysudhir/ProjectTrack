@@ -42,8 +42,9 @@
     "type": "ui_ux",
     "authority": "User only",
     "blocking": true,
-    "status": "PENDING",
-    "objective": "Approve the executable desktop shell, navigation, tabs, panes and contextual command structure."
+    "status": "REOPENED / PENDING USER APPROVAL",
+    "objective": "Approve the executable desktop shell, navigation, tabs, panes and contextual command structure.",
+    "notes": "UI-01R repair checkpoint required after user rejection; formal human approval remains UI-01."
   },
   {
     "gate_id": "G-ENG-02",
