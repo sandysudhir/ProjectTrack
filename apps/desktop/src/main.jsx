@@ -79,6 +79,7 @@ const ribbonGroups = {
 };
 const initialParams = new URLSearchParams(window.location.search);
 const futureCommands = new Set(['Revise','Link','Unlink','Percent','Save Baseline','Clear Baseline','Reset Revised','Reset Actual','Column Map','Get Updates','Shift Items','Shift Schedule','Spelling','Cost Report','Resource Cost Report','Critical Path','Critical Paths','Work Usage','Assignments','WBS','Consolidation','Summary Graph','Gridlines','Header & Footer','Format Selected']);
+const toolNames = new Set(['Arrow','Bar','Link','Revise','Percent','Text Box']);
 const dialogFields = {
   'Project info': ['Project Calendar', 'Project Start Date', 'Project Start Time', 'Calculated Project Finish Date', 'Calculated Project Finish Time'],
   'Project information': ['Project Calendar', 'Project Start Date', 'Project Start Time', 'Calculated Project Finish Date', 'Calculated Project Finish Time'],
@@ -112,6 +113,8 @@ function App() {
   const [leftWidth, setLeftWidth] = useState(42);
   const [mode, setMode] = useState('populated');
   const [dialog, setDialog] = useState(() => { const requested = initialParams.get('dialog'); if (!requested) return null; const key = Object.keys(dialogFields).find((name) => name.toLowerCase() === requested.toLowerCase()) || requested; return { title: requested, fields: dialogFields[key] || ['Presentation fixture value', 'Open behaviour remains tracked in docs/10_OPEN_QUESTIONS.md'] }; });
+  const [activeTool, setActiveTool] = useState('Arrow');
+  const [lockedTool, setLockedTool] = useState(null);
 
   const filteredRows = useMemo(() => rows.filter((row) => !query || row.name.toLowerCase().includes(query.toLowerCase())), [query]);
   const visibleRows = outlineMode === 'compact' ? filteredRows.filter((row) => row.level === 0 || row.type === 'milestone') : outlineMode === 'selective' ? filteredRows.filter((row) => row.level <= 1 || row.type === 'milestone') : filteredRows;
@@ -119,6 +122,7 @@ function App() {
   const showResource = activeNav === 'Resource';
 
   const action = (label) => { setNotice(`${label} · shell command ready`); const key = Object.keys(dialogFields).find((name) => label.toLowerCase().includes(name.toLowerCase())); if (key) setDialog({ title: label, fields: dialogFields[key] }); };
+  const chooseTool = (label) => { if (toolNames.has(label)) { setActiveTool(label); setNotice(`${label} tool selected`); } else if (label === 'Lock Tool') { setLockedTool((current) => { const next = current ? null : activeTool; setNotice(next ? `${next} tool locked for repeated use` : 'Tool lock released'); return next; }); } else action(label); };
   const toggleExpanded = () => { const next = !expanded; setExpanded(next); setOutlineMode(next ? 'expanded' : 'compact'); setNotice(next ? 'Hierarchy expanded' : 'Hierarchy compacted'); };
 
   return <div className="app-shell">
@@ -133,7 +137,7 @@ function App() {
     </nav>
 
     <div className="ribbon-tabs">{Object.keys(ribbonGroups).map((name) => <button key={name} className={ribbon === name ? 'active' : ''} onClick={() => setRibbon(name)}>{name}</button>)}<div className="ribbon-spacer" /><button className="mode-button" onClick={() => setMode(mode === 'populated' ? 'loading' : 'populated')}><span className={`state-dot ${mode}`} /> {mode === 'loading' ? 'Loading preview' : 'Workspace ready'}</button></div>
-    <section className="ribbon" aria-label={`${ribbon} commands`}><div className="ribbon-inner">{ribbonGroups[ribbon].map(([label, Icon]) => { const disabled = futureCommands.has(label); return <button key={label} className={`ribbon-command ${disabled ? 'future-command' : ''}`} disabled={disabled} title={disabled ? 'Available after UI-03 / G-ENG-02' : label} onClick={() => action(label)}><span className="command-icon"><Icon size={19} /></span><span>{label}</span></button>; })}<div className="ribbon-divider" /><button className="ribbon-command" onClick={toggleExpanded}><span className="command-icon"><ChevronRight size={19} className={expanded ? 'rotate-90' : ''} /></span><span>{expanded ? 'Collapse' : 'Expand'}</span></button><button className="ribbon-command" onClick={() => action('Autofit')}><span className="command-icon"><SlidersHorizontal size={19} /></span><span>Autofit</span></button></div><div className="ribbon-caption">{ribbon} commands</div></section>
+    <section className="ribbon" aria-label={`${ribbon} commands`}><div className="ribbon-inner">{ribbonGroups[ribbon].map(([label, Icon]) => { const disabled = futureCommands.has(label); const isTool = toolNames.has(label); const isLock = label === 'Lock Tool'; return <button key={label} className={`ribbon-command ${disabled ? 'future-command' : ''} ${isTool && activeTool === label ? 'tool-active' : ''} ${isLock && lockedTool ? 'tool-locked' : ''}`} disabled={disabled} title={disabled ? 'Available after UI-03 / G-ENG-02' : isLock && lockedTool ? `${lockedTool} locked for repeated use` : label} onClick={() => chooseTool(label)}><span className="command-icon"><Icon size={19} /></span><span>{isLock && lockedTool ? `Unlock ${lockedTool}` : label}</span></button>; })}<div className="ribbon-divider" /><button className="ribbon-command" onClick={toggleExpanded}><span className="command-icon"><ChevronRight size={19} className={expanded ? 'rotate-90' : ''} /></span><span>{expanded ? 'Collapse' : 'Expand'}</span></button><button className="ribbon-command" onClick={() => action('Autofit')}><span className="command-icon"><SlidersHorizontal size={19} /></span><span>Autofit</span></button></div><div className="ribbon-caption">{ribbon} commands</div></section>
 
     <div className="work-area">
       <aside className="sidebar">
@@ -155,7 +159,7 @@ function App() {
       </main>
     </div>
     {dialog && <ShellDialog title={dialog.title} fields={dialog.fields} onClose={() => setDialog(null)} />}
-    <footer className="statusbar"><div><span className="status-led" />{notice}</div><div className="status-center">{filteredRows.length} rows · {projects.length - 1} projects · Last saved just now</div><div className="status-right"><span>Zoom {zoom}%</span><button onClick={() => setZoom(Math.max(60, zoom - 10))}>−</button><button onClick={() => setZoom(Math.min(160, zoom + 10))}>＋</button><span className="connection"><span className="status-led green" />Local workspace</span></div></footer>
+    <footer className="statusbar"><div><span className="status-led" />{notice}</div><div className="status-center">Tool: {activeTool}{lockedTool ? ` · ${lockedTool} locked` : ''} · {filteredRows.length} rows · {projects.length - 1} projects · Last saved just now</div><div className="status-right"><span>Zoom {zoom}%</span><button onClick={() => setZoom(Math.max(60, zoom - 10))}>−</button><button onClick={() => setZoom(Math.min(160, zoom + 10))}>＋</button><span className="connection"><span className="status-led green" />Local workspace</span></div></footer>
   </div>;
 }
 
