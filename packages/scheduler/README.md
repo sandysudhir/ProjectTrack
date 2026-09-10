@@ -1,3 +1,3 @@
-# Placeholder
+# Scheduler package
 
-This directory is intentionally empty until its authorised phase. Read the root `AGENTS.md` before adding files.
+Deterministic full scheduling for the G-ENG-02 checkpoint: dependencies, lag/lead, constraints, cycle rejection, summaries and critical-path float.

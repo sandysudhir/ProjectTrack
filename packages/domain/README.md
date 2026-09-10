@@ -1,3 +1,3 @@
-# Placeholder
+# Domain package
 
-This directory is intentionally empty until its authorised phase. Read the root `AGENTS.md` before adding files.
+Immutable task and dependency entities plus graph validation used by the G-ENG-02 scheduler core. The package has no React or UI dependencies.

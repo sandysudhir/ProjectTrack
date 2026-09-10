@@ -1,3 +1,3 @@
-# Placeholder
+# Calendar engine
 
-This directory is intentionally empty until its authorised phase. Read the root `AGENTS.md` before adding files.
+UTC-stable working-time arithmetic for split shifts, weekends, exceptions and inherited calendars. The public functions are exported from `index.mjs`.
