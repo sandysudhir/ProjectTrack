@@ -155,7 +155,7 @@ function App() {
       </main>
     </div>
     {dialog && <ShellDialog title={dialog.title} fields={dialog.fields} onClose={() => setDialog(null)} />}
-    <footer className="statusbar"><div><span className="status-led" />{notice}</div><div className="status-center">{filteredRows.length} rows · 3 projects · Last saved just now</div><div className="status-right"><span>Zoom {zoom}%</span><button onClick={() => setZoom(Math.max(60, zoom - 10))}>−</button><button onClick={() => setZoom(Math.min(160, zoom + 10))}>＋</button><span className="connection"><span className="status-led green" />Local workspace</span></div></footer>
+    <footer className="statusbar"><div><span className="status-led" />{notice}</div><div className="status-center">{filteredRows.length} rows · {projects.length - 1} projects · Last saved just now</div><div className="status-right"><span>Zoom {zoom}%</span><button onClick={() => setZoom(Math.max(60, zoom - 10))}>−</button><button onClick={() => setZoom(Math.min(160, zoom + 10))}>＋</button><span className="connection"><span className="status-led green" />Local workspace</span></div></footer>
   </div>;
 }
 
