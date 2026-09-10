@@ -7,8 +7,8 @@
 - **Current authorised sequence:** UI-01R screenshot-to-interface reconciliation only; P03 and every later phase are blocked.
 - **P01 human gate state:** CLOSED by explicit user approval of the committed architecture and information-architecture direction.
 - **Product implementation:** P02 is authorised; later phases remain blocked by their prerequisites.
-- **Next frontend gate:** `UI-01`.
-- **Next permitted implementation deliverable:** UI-01R evidence, coverage mapping, reconciled ribbon/dialog architecture, and independent validation.
-- **UI-01 state:** REOPENED / PENDING USER APPROVAL. UI-01R is the repair checkpoint; formal approval remains UI-01.
+- **Next technical gate:** `G-ENG-02`.
+- **Next permitted implementation deliverable:** G-ENG-02 scheduler-engine implementation and independent validation.
+- **UI-01 state:** APPROVED on 2026-09-10 after the UI-01R repair checkpoint and live review. Approval record: `governance/approvals/UI-01_2026-09-10.md`.
 - **Still prohibited:** scheduler/resource/tracking calculations, persistence, import/export, reports, consolidation logic, or any P03+ implementation.
 - **Remote handoff status:** dedicated GitHub repository confirmed at `https://github.com/sandysudhir/ProjectTrack`.

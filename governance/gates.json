@@ -42,9 +42,12 @@
     "type": "ui_ux",
     "authority": "User only",
     "blocking": true,
-    "status": "REOPENED / PENDING USER APPROVAL",
+    "status": "APPROVED",
     "objective": "Approve the executable desktop shell, navigation, tabs, panes and contextual command structure.",
-    "notes": "UI-01R repair checkpoint required after user rejection; formal human approval remains UI-01."
+    "notes": "Explicit user approval recorded after UI-01R repair checkpoint and live review.",
+    "approved_at": "2026-09-10",
+    "approved_commit": "29409b9727be8e9dffee0df49df42f8286ae50f3",
+    "approval_record": "governance/approvals/UI-01_2026-09-10.md"
   },
   {
     "gate_id": "G-ENG-02",

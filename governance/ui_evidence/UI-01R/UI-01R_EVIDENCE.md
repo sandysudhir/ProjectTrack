@@ -92,3 +92,11 @@
 - The 41 source screenshots are workflow and density references; ProjectTrack uses original branding, icons and styling.
 - Shell dialogs expose presentation fixture fields only; domain calculations, persistence, import/export, reporting and consolidation synchronization remain blocked.
 - The evidence set includes actual running-app captures for integrated, ribbon, navigation, compact and dialog states; no AI-generated image is used.
+
+## Final UI-01 approval evidence
+
+- `32-final-1440x900.png` — final approved shell capture at 1440×900.
+- `33-final-1920x1080.png` — final approved shell capture at 1920×1080.
+- Graphical date revision: drag a task start/finish handle; the original bar remains visible and a revised outlined line appears. Release opens the rationale dialog; double-click reopens it; hover exposes the saved rationale.
+- Graphical completion: drag the vertical completion marker on the bar; the filled segment and `% Complete` grid cell update live.
+- Verified live interaction: Architecture changed from 62% to 93%, with status-bar feedback.
