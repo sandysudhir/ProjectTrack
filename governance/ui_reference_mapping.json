@@ -18,7 +18,7 @@
       "implementation_phase": "P02 / UI-01R",
       "acceptance_test": "UI01R-SHOT-01",
       "unresolved_question": "Preserve open behaviour from docs/10_OPEN_QUESTIONS.md where semantics are not screenshot-confirmed",
-      "evidence_path": "assets/reference/assets/reference/01_schedule_main_expanded.png"
+      "evidence_path": "assets/reference/01_schedule_main_expanded.png"
     },
     {
       "screenshot_number": 2,
@@ -34,7 +34,7 @@
       "implementation_phase": "P02 / UI-01R",
       "acceptance_test": "UI01R-SHOT-02",
       "unresolved_question": "Preserve open behaviour from docs/10_OPEN_QUESTIONS.md where semantics are not screenshot-confirmed",
-      "evidence_path": "assets/reference/assets/reference/02_insert_ribbon.png"
+      "evidence_path": "assets/reference/02_insert_ribbon.png"
     },
     {
       "screenshot_number": 3,
@@ -50,7 +50,7 @@
       "implementation_phase": "P02 / UI-01R",
       "acceptance_test": "UI01R-SHOT-03",
       "unresolved_question": "Preserve open behaviour from docs/10_OPEN_QUESTIONS.md where semantics are not screenshot-confirmed",
-      "evidence_path": "assets/reference/assets/reference/03_format_ribbon.png"
+      "evidence_path": "assets/reference/03_format_ribbon.png"
     },
     {
       "screenshot_number": 4,
@@ -66,7 +66,7 @@
       "implementation_phase": "P02 / UI-01R",
       "acceptance_test": "UI01R-SHOT-04",
       "unresolved_question": "Preserve open behaviour from docs/10_OPEN_QUESTIONS.md where semantics are not screenshot-confirmed",
-      "evidence_path": "assets/reference/assets/reference/04_view_ribbon.png"
+      "evidence_path": "assets/reference/04_view_ribbon.png"
     },
     {
       "screenshot_number": 5,
@@ -82,7 +82,7 @@
       "implementation_phase": "P02 / UI-01R",
       "acceptance_test": "UI01R-SHOT-05",
       "unresolved_question": "Preserve open behaviour from docs/10_OPEN_QUESTIONS.md where semantics are not screenshot-confirmed",
-      "evidence_path": "assets/reference/assets/reference/05_project_ribbon.png"
+      "evidence_path": "assets/reference/05_project_ribbon.png"
     },
     {
       "screenshot_number": 6,
@@ -98,7 +98,7 @@
       "implementation_phase": "P02 / UI-01R",
       "acceptance_test": "UI01R-SHOT-06",
       "unresolved_question": "Preserve open behaviour from docs/10_OPEN_QUESTIONS.md where semantics are not screenshot-confirmed",
-      "evidence_path": "assets/reference/assets/reference/06_tools_ribbon.png"
+      "evidence_path": "assets/reference/06_tools_ribbon.png"
     },
     {
       "screenshot_number": 7,
@@ -114,7 +114,7 @@
       "implementation_phase": "P02 / UI-01R",
       "acceptance_test": "UI01R-SHOT-07",
       "unresolved_question": "Preserve open behaviour from docs/10_OPEN_QUESTIONS.md where semantics are not screenshot-confirmed",
-      "evidence_path": "assets/reference/assets/reference/07_application_ribbon.png"
+      "evidence_path": "assets/reference/07_application_ribbon.png"
     },
     {
       "screenshot_number": 8,
@@ -130,7 +130,7 @@
       "implementation_phase": "P02 / UI-01R",
       "acceptance_test": "UI01R-SHOT-08",
       "unresolved_question": "Preserve open behaviour from docs/10_OPEN_QUESTIONS.md where semantics are not screenshot-confirmed",
-      "evidence_path": "assets/reference/assets/reference/08_view_selector_dropdown.png"
+      "evidence_path": "assets/reference/08_view_selector_dropdown.png"
     },
     {
       "screenshot_number": 9,
@@ -146,7 +146,7 @@
       "implementation_phase": "P02 / UI-01R",
       "acceptance_test": "UI01R-SHOT-09",
       "unresolved_question": "Preserve open behaviour from docs/10_OPEN_QUESTIONS.md where semantics are not screenshot-confirmed",
-      "evidence_path": "assets/reference/assets/reference/09_faststeps_menu_1.png"
+      "evidence_path": "assets/reference/09_faststeps_menu_1.png"
     },
     {
       "screenshot_number": 10,
@@ -162,7 +162,7 @@
       "implementation_phase": "P02 / UI-01R",
       "acceptance_test": "UI01R-SHOT-10",
       "unresolved_question": "Preserve open behaviour from docs/10_OPEN_QUESTIONS.md where semantics are not screenshot-confirmed",
-      "evidence_path": "assets/reference/assets/reference/10_faststeps_menu_2.png"
+      "evidence_path": "assets/reference/10_faststeps_menu_2.png"
     },
     {
       "screenshot_number": 11,
@@ -178,7 +178,7 @@
       "implementation_phase": "P02 / UI-01R",
       "acceptance_test": "UI01R-SHOT-11",
       "unresolved_question": "Preserve open behaviour from docs/10_OPEN_QUESTIONS.md where semantics are not screenshot-confirmed",
-      "evidence_path": "assets/reference/assets/reference/11_shift_items_dialog.png"
+      "evidence_path": "assets/reference/11_shift_items_dialog.png"
     },
     {
       "screenshot_number": 12,
@@ -194,7 +194,7 @@
       "implementation_phase": "P02 / UI-01R",
       "acceptance_test": "UI01R-SHOT-12",
       "unresolved_question": "Preserve open behaviour from docs/10_OPEN_QUESTIONS.md where semantics are not screenshot-confirmed",
-      "evidence_path": "assets/reference/assets/reference/12_shift_schedule_dialog.png"
+      "evidence_path": "assets/reference/12_shift_schedule_dialog.png"
     },
     {
       "screenshot_number": 13,
@@ -210,7 +210,7 @@
       "implementation_phase": "P02 / UI-01R",
       "acceptance_test": "UI01R-SHOT-13",
       "unresolved_question": "Preserve open behaviour from docs/10_OPEN_QUESTIONS.md where semantics are not screenshot-confirmed",
-      "evidence_path": "assets/reference/assets/reference/13_autofit_menu.png"
+      "evidence_path": "assets/reference/13_autofit_menu.png"
     },
     {
       "screenshot_number": 14,
@@ -226,7 +226,7 @@
       "implementation_phase": "P02 / UI-01R",
       "acceptance_test": "UI01R-SHOT-14",
       "unresolved_question": "Preserve open behaviour from docs/10_OPEN_QUESTIONS.md where semantics are not screenshot-confirmed",
-      "evidence_path": "assets/reference/assets/reference/14_column_map_dialog.png"
+      "evidence_path": "assets/reference/14_column_map_dialog.png"
     },
     {
       "screenshot_number": 15,
@@ -242,7 +242,7 @@
       "implementation_phase": "P02 / UI-01R",
       "acceptance_test": "UI01R-SHOT-15",
       "unresolved_question": "Preserve open behaviour from docs/10_OPEN_QUESTIONS.md where semantics are not screenshot-confirmed",
-      "evidence_path": "assets/reference/assets/reference/15_schedule_compacted_view.png"
+      "evidence_path": "assets/reference/15_schedule_compacted_view.png"
     },
     {
       "screenshot_number": 16,
@@ -258,7 +258,7 @@
       "implementation_phase": "P02 / UI-01R",
       "acceptance_test": "UI01R-SHOT-16",
       "unresolved_question": "Preserve open behaviour from docs/10_OPEN_QUESTIONS.md where semantics are not screenshot-confirmed",
-      "evidence_path": "assets/reference/assets/reference/16_quicklook_hover_card.png"
+      "evidence_path": "assets/reference/16_quicklook_hover_card.png"
     },
     {
       "screenshot_number": 17,
@@ -274,7 +274,7 @@
       "implementation_phase": "P02 / UI-01R",
       "acceptance_test": "UI01R-SHOT-17",
       "unresolved_question": "Preserve open behaviour from docs/10_OPEN_QUESTIONS.md where semantics are not screenshot-confirmed",
-      "evidence_path": "assets/reference/assets/reference/17_activity_info_bar_tracking.png"
+      "evidence_path": "assets/reference/17_activity_info_bar_tracking.png"
     },
     {
       "screenshot_number": 18,
@@ -290,7 +290,7 @@
       "implementation_phase": "P02 / UI-01R",
       "acceptance_test": "UI01R-SHOT-18",
       "unresolved_question": "Preserve open behaviour from docs/10_OPEN_QUESTIONS.md where semantics are not screenshot-confirmed",
-      "evidence_path": "assets/reference/assets/reference/18_activity_info_milestone_tracking.png"
+      "evidence_path": "assets/reference/18_activity_info_milestone_tracking.png"
     },
     {
       "screenshot_number": 19,
@@ -306,7 +306,7 @@
       "implementation_phase": "P02 / UI-01R",
       "acceptance_test": "UI01R-SHOT-19",
       "unresolved_question": "Preserve open behaviour from docs/10_OPEN_QUESTIONS.md where semantics are not screenshot-confirmed",
-      "evidence_path": "assets/reference/assets/reference/19_schedule_detail_and_scaling.png"
+      "evidence_path": "assets/reference/19_schedule_detail_and_scaling.png"
     },
     {
       "screenshot_number": 20,
@@ -322,7 +322,7 @@
       "implementation_phase": "P02 / UI-01R",
       "acceptance_test": "UI01R-SHOT-20",
       "unresolved_question": "Preserve open behaviour from docs/10_OPEN_QUESTIONS.md where semantics are not screenshot-confirmed",
-      "evidence_path": "assets/reference/assets/reference/20_resource_view_table.png"
+      "evidence_path": "assets/reference/20_resource_view_table.png"
     },
     {
       "screenshot_number": 21,
@@ -338,7 +338,7 @@
       "implementation_phase": "P02 / UI-01R",
       "acceptance_test": "UI01R-SHOT-21",
       "unresolved_question": "Preserve open behaviour from docs/10_OPEN_QUESTIONS.md where semantics are not screenshot-confirmed",
-      "evidence_path": "assets/reference/assets/reference/21_calendar_view.png"
+      "evidence_path": "assets/reference/21_calendar_view.png"
     },
     {
       "screenshot_number": 22,
@@ -354,7 +354,7 @@
       "implementation_phase": "P02 / UI-01R",
       "acceptance_test": "UI01R-SHOT-22",
       "unresolved_question": "Preserve open behaviour from docs/10_OPEN_QUESTIONS.md where semantics are not screenshot-confirmed",
-      "evidence_path": "assets/reference/assets/reference/22_define_consolidation_dialog.png"
+      "evidence_path": "assets/reference/22_define_consolidation_dialog.png"
     },
     {
       "screenshot_number": 23,
@@ -370,7 +370,7 @@
       "implementation_phase": "P02 / UI-01R",
       "acceptance_test": "UI01R-SHOT-23",
       "unresolved_question": "Preserve open behaviour from docs/10_OPEN_QUESTIONS.md where semantics are not screenshot-confirmed",
-      "evidence_path": "assets/reference/assets/reference/23_faststeps_menu_calendar_context.png"
+      "evidence_path": "assets/reference/23_faststeps_menu_calendar_context.png"
     },
     {
       "screenshot_number": 24,
@@ -386,7 +386,7 @@
       "implementation_phase": "P02 / UI-01R",
       "acceptance_test": "UI01R-SHOT-24",
       "unresolved_question": "Preserve open behaviour from docs/10_OPEN_QUESTIONS.md where semantics are not screenshot-confirmed",
-      "evidence_path": "assets/reference/assets/reference/24_autofit_view_context.png"
+      "evidence_path": "assets/reference/24_autofit_view_context.png"
     },
     {
       "screenshot_number": 25,
@@ -402,7 +402,7 @@
       "implementation_phase": "P02 / UI-01R",
       "acceptance_test": "UI01R-SHOT-25",
       "unresolved_question": "Preserve open behaviour from docs/10_OPEN_QUESTIONS.md where semantics are not screenshot-confirmed",
-      "evidence_path": "assets/reference/assets/reference/25_project_information_dialog.png"
+      "evidence_path": "assets/reference/25_project_information_dialog.png"
     },
     {
       "screenshot_number": 26,
@@ -418,7 +418,7 @@
       "implementation_phase": "P02 / UI-01R",
       "acceptance_test": "UI01R-SHOT-26",
       "unresolved_question": "Preserve open behaviour from docs/10_OPEN_QUESTIONS.md where semantics are not screenshot-confirmed",
-      "evidence_path": "assets/reference/assets/reference/26_resource_information_dialog.png"
+      "evidence_path": "assets/reference/26_resource_information_dialog.png"
     },
     {
       "screenshot_number": 27,
@@ -434,7 +434,7 @@
       "implementation_phase": "P02 / UI-01R",
       "acceptance_test": "UI01R-SHOT-27",
       "unresolved_question": "Preserve open behaviour from docs/10_OPEN_QUESTIONS.md where semantics are not screenshot-confirmed",
-      "evidence_path": "assets/reference/assets/reference/27_work_calendars_dialog.png"
+      "evidence_path": "assets/reference/27_work_calendars_dialog.png"
     },
     {
       "screenshot_number": 28,
@@ -450,7 +450,7 @@
       "implementation_phase": "P02 / UI-01R",
       "acceptance_test": "UI01R-SHOT-28",
       "unresolved_question": "Preserve open behaviour from docs/10_OPEN_QUESTIONS.md where semantics are not screenshot-confirmed",
-      "evidence_path": "assets/reference/assets/reference/28_timeline_units_menu.png"
+      "evidence_path": "assets/reference/28_timeline_units_menu.png"
     },
     {
       "screenshot_number": 29,
@@ -466,7 +466,7 @@
       "implementation_phase": "P02 / UI-01R",
       "acceptance_test": "UI01R-SHOT-29",
       "unresolved_question": "Preserve open behaviour from docs/10_OPEN_QUESTIONS.md where semantics are not screenshot-confirmed",
-      "evidence_path": "assets/reference/assets/reference/29_resource_sort_menu.png"
+      "evidence_path": "assets/reference/29_resource_sort_menu.png"
     },
     {
       "screenshot_number": 30,
@@ -482,7 +482,7 @@
       "implementation_phase": "P02 / UI-01R",
       "acceptance_test": "UI01R-SHOT-30",
       "unresolved_question": "Preserve open behaviour from docs/10_OPEN_QUESTIONS.md where semantics are not screenshot-confirmed",
-      "evidence_path": "assets/reference/assets/reference/30_action_columns_menu.png"
+      "evidence_path": "assets/reference/30_action_columns_menu.png"
     },
     {
       "screenshot_number": 31,
@@ -498,7 +498,7 @@
       "implementation_phase": "P02 / UI-01R",
       "acceptance_test": "UI01R-SHOT-31",
       "unresolved_question": "Preserve open behaviour from docs/10_OPEN_QUESTIONS.md where semantics are not screenshot-confirmed",
-      "evidence_path": "assets/reference/assets/reference/31_format_resource_view_gridlines.png"
+      "evidence_path": "assets/reference/31_format_resource_view_gridlines.png"
     },
     {
       "screenshot_number": 32,
@@ -514,7 +514,7 @@
       "implementation_phase": "P02 / UI-01R",
       "acceptance_test": "UI01R-SHOT-32",
       "unresolved_question": "Preserve open behaviour from docs/10_OPEN_QUESTIONS.md where semantics are not screenshot-confirmed",
-      "evidence_path": "assets/reference/assets/reference/32_header_footer_dialog.png"
+      "evidence_path": "assets/reference/32_header_footer_dialog.png"
     },
     {
       "screenshot_number": 33,
@@ -530,7 +530,7 @@
       "implementation_phase": "P02 / UI-01R",
       "acceptance_test": "UI01R-SHOT-33",
       "unresolved_question": "Preserve open behaviour from docs/10_OPEN_QUESTIONS.md where semantics are not screenshot-confirmed",
-      "evidence_path": "assets/reference/assets/reference/33_arrow_tool_tooltip.png"
+      "evidence_path": "assets/reference/33_arrow_tool_tooltip.png"
     },
     {
       "screenshot_number": 34,
@@ -546,7 +546,7 @@
       "implementation_phase": "P02 / UI-01R",
       "acceptance_test": "UI01R-SHOT-34",
       "unresolved_question": "Preserve open behaviour from docs/10_OPEN_QUESTIONS.md where semantics are not screenshot-confirmed",
-      "evidence_path": "assets/reference/assets/reference/34_bar_tool_tooltip.png"
+      "evidence_path": "assets/reference/34_bar_tool_tooltip.png"
     },
     {
       "screenshot_number": 35,
@@ -562,7 +562,7 @@
       "implementation_phase": "P02 / UI-01R",
       "acceptance_test": "UI01R-SHOT-35",
       "unresolved_question": "Preserve open behaviour from docs/10_OPEN_QUESTIONS.md where semantics are not screenshot-confirmed",
-      "evidence_path": "assets/reference/assets/reference/35_revise_tool_tooltip.png"
+      "evidence_path": "assets/reference/35_revise_tool_tooltip.png"
     },
     {
       "screenshot_number": 36,
@@ -578,7 +578,7 @@
       "implementation_phase": "P02 / UI-01R",
       "acceptance_test": "UI01R-SHOT-36",
       "unresolved_question": "Preserve open behaviour from docs/10_OPEN_QUESTIONS.md where semantics are not screenshot-confirmed",
-      "evidence_path": "assets/reference/assets/reference/36_percent_tool_tooltip.png"
+      "evidence_path": "assets/reference/36_percent_tool_tooltip.png"
     },
     {
       "screenshot_number": 37,
@@ -594,7 +594,7 @@
       "implementation_phase": "P02 / UI-01R",
       "acceptance_test": "UI01R-SHOT-37",
       "unresolved_question": "Preserve open behaviour from docs/10_OPEN_QUESTIONS.md where semantics are not screenshot-confirmed",
-      "evidence_path": "assets/reference/assets/reference/37_text_box_tool_tooltip.png"
+      "evidence_path": "assets/reference/37_text_box_tool_tooltip.png"
     },
     {
       "screenshot_number": 38,
@@ -610,7 +610,7 @@
       "implementation_phase": "P02 / UI-01R",
       "acceptance_test": "UI01R-SHOT-38",
       "unresolved_question": "Preserve open behaviour from docs/10_OPEN_QUESTIONS.md where semantics are not screenshot-confirmed",
-      "evidence_path": "assets/reference/assets/reference/38_bar_styles_gallery.png"
+      "evidence_path": "assets/reference/38_bar_styles_gallery.png"
     },
     {
       "screenshot_number": 39,
@@ -626,7 +626,7 @@
       "implementation_phase": "P02 / UI-01R",
       "acceptance_test": "UI01R-SHOT-39",
       "unresolved_question": "Preserve open behaviour from docs/10_OPEN_QUESTIONS.md where semantics are not screenshot-confirmed",
-      "evidence_path": "assets/reference/assets/reference/39_picture_tool_tooltip.png"
+      "evidence_path": "assets/reference/39_picture_tool_tooltip.png"
     },
     {
       "screenshot_number": 40,
@@ -642,7 +642,7 @@
       "implementation_phase": "P02 / UI-01R",
       "acceptance_test": "UI01R-SHOT-40",
       "unresolved_question": "Preserve open behaviour from docs/10_OPEN_QUESTIONS.md where semantics are not screenshot-confirmed",
-      "evidence_path": "assets/reference/assets/reference/40_summary_graph_dialog.png"
+      "evidence_path": "assets/reference/40_summary_graph_dialog.png"
     },
     {
       "screenshot_number": 41,
@@ -658,7 +658,7 @@
       "implementation_phase": "P02 / UI-01R",
       "acceptance_test": "UI01R-SHOT-41",
       "unresolved_question": "Preserve open behaviour from docs/10_OPEN_QUESTIONS.md where semantics are not screenshot-confirmed",
-      "evidence_path": "assets/reference/assets/reference/41_bar_style_tooltip.png"
+      "evidence_path": "assets/reference/41_bar_style_tooltip.png"
     },
     {
       "screenshot_number": 42,
@@ -674,7 +674,7 @@
       "implementation_phase": "P02 / UI-01R",
       "acceptance_test": "UI01R-SHOT-42",
       "unresolved_question": "Preserve open behaviour from docs/10_OPEN_QUESTIONS.md where semantics are not screenshot-confirmed",
-      "evidence_path": "assets/reference/assets/reference/42_contact_reference_01.png"
+      "evidence_path": "assets/reference/42_contact_reference_01.png"
     },
     {
       "screenshot_number": 43,
@@ -690,7 +690,7 @@
       "implementation_phase": "P02 / UI-01R",
       "acceptance_test": "UI01R-SHOT-43",
       "unresolved_question": "Preserve open behaviour from docs/10_OPEN_QUESTIONS.md where semantics are not screenshot-confirmed",
-      "evidence_path": "assets/reference/assets/reference/43_contact_reference_02.png"
+      "evidence_path": "assets/reference/43_contact_reference_02.png"
     },
     {
       "screenshot_number": 44,
@@ -706,7 +706,7 @@
       "implementation_phase": "P02 / UI-01R",
       "acceptance_test": "UI01R-SHOT-44",
       "unresolved_question": "Preserve open behaviour from docs/10_OPEN_QUESTIONS.md where semantics are not screenshot-confirmed",
-      "evidence_path": "assets/reference/assets/reference/44_contact_reference_03.png"
+      "evidence_path": "assets/reference/44_contact_reference_03.png"
     },
     {
       "screenshot_number": 45,
@@ -722,7 +722,7 @@
       "implementation_phase": "P02 / UI-01R",
       "acceptance_test": "UI01R-SHOT-45",
       "unresolved_question": "Preserve open behaviour from docs/10_OPEN_QUESTIONS.md where semantics are not screenshot-confirmed",
-      "evidence_path": "assets/reference/assets/reference/45_contact_reference_04.png"
+      "evidence_path": "assets/reference/45_contact_reference_04.png"
     },
     {
       "screenshot_number": 46,
@@ -738,7 +738,7 @@
       "implementation_phase": "P02 / UI-01R",
       "acceptance_test": "UI01R-SHOT-46",
       "unresolved_question": "Preserve open behaviour from docs/10_OPEN_QUESTIONS.md where semantics are not screenshot-confirmed",
-      "evidence_path": "assets/reference/assets/reference/46_contact_reference_05.png"
+      "evidence_path": "assets/reference/46_contact_reference_05.png"
     },
     {
       "screenshot_number": 47,
@@ -754,7 +754,7 @@
       "implementation_phase": "P02 / UI-01R",
       "acceptance_test": "UI01R-SHOT-47",
       "unresolved_question": "Preserve open behaviour from docs/10_OPEN_QUESTIONS.md where semantics are not screenshot-confirmed",
-      "evidence_path": "assets/reference/assets/reference/47_contact_reference_06.png"
+      "evidence_path": "assets/reference/47_contact_reference_06.png"
     },
     {
       "screenshot_number": 48,
@@ -770,7 +770,7 @@
       "implementation_phase": "P02 / UI-01R",
       "acceptance_test": "UI01R-SHOT-48",
       "unresolved_question": "Preserve open behaviour from docs/10_OPEN_QUESTIONS.md where semantics are not screenshot-confirmed",
-      "evidence_path": "assets/reference/assets/reference/48_contact_reference_07.png"
+      "evidence_path": "assets/reference/48_contact_reference_07.png"
     },
     {
       "screenshot_number": 49,
@@ -786,7 +786,7 @@
       "implementation_phase": "P02 / UI-01R",
       "acceptance_test": "UI01R-SHOT-49",
       "unresolved_question": "Preserve open behaviour from docs/10_OPEN_QUESTIONS.md where semantics are not screenshot-confirmed",
-      "evidence_path": "assets/reference/assets/reference/49_contact_reference_08.png"
+      "evidence_path": "assets/reference/49_contact_reference_08.png"
     },
     {
       "screenshot_number": 50,
@@ -802,7 +802,7 @@
       "implementation_phase": "P02 / UI-01R",
       "acceptance_test": "UI01R-SHOT-50",
       "unresolved_question": "Preserve open behaviour from docs/10_OPEN_QUESTIONS.md where semantics are not screenshot-confirmed",
-      "evidence_path": "assets/reference/assets/reference/50_reference_page_26.png"
+      "evidence_path": "assets/reference/50_reference_page_26.png"
     },
     {
       "screenshot_number": 51,
@@ -818,7 +818,7 @@
       "implementation_phase": "P02 / UI-01R",
       "acceptance_test": "UI01R-SHOT-51",
       "unresolved_question": "Preserve open behaviour from docs/10_OPEN_QUESTIONS.md where semantics are not screenshot-confirmed",
-      "evidence_path": "assets/reference/assets/reference/51_reference_page_27.png"
+      "evidence_path": "assets/reference/51_reference_page_27.png"
     },
     {
       "screenshot_number": 52,
@@ -834,7 +834,7 @@
       "implementation_phase": "P02 / UI-01R",
       "acceptance_test": "UI01R-SHOT-52",
       "unresolved_question": "Preserve open behaviour from docs/10_OPEN_QUESTIONS.md where semantics are not screenshot-confirmed",
-      "evidence_path": "assets/reference/assets/reference/52_reference_page_28.png"
+      "evidence_path": "assets/reference/52_reference_page_28.png"
     }
   ]
 }
