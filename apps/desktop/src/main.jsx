@@ -105,12 +105,12 @@ const layoutPresets = [
 ];
 
 const costRows = [
-  { id: 1, stage: 'Industrial design', activity: 'Market research', hours: 24, rate: 75, materials: 1200, note: 'Research samples' },
-  { id: 2, stage: 'Industrial design', activity: 'Concept development', hours: 52, rate: 90, materials: 2800, note: 'Prototype mock-ups' },
-  { id: 3, stage: 'Electronics', activity: 'Architecture', hours: 36, rate: 110, materials: 4500, note: 'Evaluation boards' },
-  { id: 4, stage: 'Electronics', activity: 'Schematic design', hours: 68, rate: 110, materials: 7200, note: 'PCB prototypes' },
-  { id: 5, stage: 'Firmware', activity: 'Core development', hours: 84, rate: 105, materials: 1600, note: 'Test fixtures' },
-  { id: 6, stage: 'Testing & certification', activity: 'Safety testing', hours: 40, rate: 95, materials: 3800, note: 'Certification lab' },
+  { id: 1, stage: 'Industrial design', activity: 'Market research', hours: 24, rate: 75, materials: 1200, spentHours: 22, spentRate: 75, spentMaterials: 1300, note: 'Research samples' },
+  { id: 2, stage: 'Industrial design', activity: 'Concept development', hours: 52, rate: 90, materials: 2800, spentHours: 58, spentRate: 90, spentMaterials: 3200, note: 'Prototype mock-ups' },
+  { id: 3, stage: 'Electronics', activity: 'Architecture', hours: 36, rate: 110, materials: 4500, spentHours: 28, spentRate: 110, spentMaterials: 3600, note: 'Evaluation boards' },
+  { id: 4, stage: 'Electronics', activity: 'Schematic design', hours: 68, rate: 110, materials: 7200, spentHours: 74, spentRate: 110, spentMaterials: 8500, note: 'PCB prototypes' },
+  { id: 5, stage: 'Firmware', activity: 'Core development', hours: 84, rate: 105, materials: 1600, spentHours: 70, spentRate: 105, spentMaterials: 1800, note: 'Test fixtures' },
+  { id: 6, stage: 'Testing & certification', activity: 'Safety testing', hours: 40, rate: 95, materials: 3800, spentHours: 35, spentRate: 95, spentMaterials: 4100, note: 'Certification lab' },
 ];
 
 const dialogFields = {
@@ -206,12 +206,45 @@ function StatusLayoutView({ rows, notice }) {
 }
 
 function CostLayoutView({ action, notice }) {
-  const [values, setValues] = useState(() => Object.fromEntries(costRows.map((row) => [row.id, { hours: row.hours, rate: row.rate, materials: row.materials }])));
+  const [values, setValues] = useState(() => Object.fromEntries(costRows.map((row) => [row.id, {
+    plannedHours: row.hours,
+    plannedRate: row.rate,
+    plannedMaterials: row.materials,
+    spentHours: row.spentHours,
+    spentRate: row.spentRate,
+    spentMaterials: row.spentMaterials,
+  }])));
   const update = (id, field, raw) => setValues((current) => ({ ...current, [id]: { ...current[id], [field]: Number(raw) || 0 } }));
-  const rowsWithTotals = costRows.map((row) => ({ ...row, ...values[row.id], labor: values[row.id].hours * values[row.id].rate, total: values[row.id].hours * values[row.id].rate + values[row.id].materials }));
-  const stageTotals = rowsWithTotals.reduce((acc, row) => { acc[row.stage] = (acc[row.stage] || 0) + row.total; return acc; }, {});
-  const grandTotal = rowsWithTotals.reduce((sum, row) => sum + row.total, 0);
-  return <section className="cost-layout-view"><div className="cost-toolbar"><div><span className="eyebrow">COST LAYOUT | VISUAL REFERENCE</span><h2>Personnel and material cost detail</h2><p>Every activity carries hours, hourly rate, labor cost, material cost and a row total.</p></div><div className="cost-toolbar-actions"><button className="ghost-button" onClick={() => action('Add material cost')}>+ Material cost</button><button className="primary-button" onClick={() => action('Cost report')}>Open cost report</button></div></div><div className="cost-summary"><div><span>Personnel labor</span><strong>${rowsWithTotals.reduce((sum, row) => sum + row.labor, 0).toLocaleString()}</strong></div><div><span>Materials</span><strong>${rowsWithTotals.reduce((sum, row) => sum + row.materials, 0).toLocaleString()}</strong></div><div><span>Project total</span><strong>${grandTotal.toLocaleString()}</strong></div></div><div className="cost-table-wrap"><table className="cost-table"><thead><tr><th>Stage</th><th>Activity</th><th>Hours</th><th>Hourly rate</th><th>Personnel cost</th><th>Material cost</th><th>Material note</th><th>Row total</th></tr></thead><tbody>{rowsWithTotals.map((row) => <tr key={row.id}><td>{row.stage}</td><td className="cost-activity">{row.activity}</td><td><input type="number" min="0" value={row.hours} onChange={(event) => update(row.id, 'hours', event.target.value)} /></td><td><span className="currency-input"><b>$</b><input type="number" min="0" value={row.rate} onChange={(event) => update(row.id, 'rate', event.target.value)} /></span></td><td>${row.labor.toLocaleString()}</td><td><span className="currency-input"><b>$</b><input type="number" min="0" value={row.materials} onChange={(event) => update(row.id, 'materials', event.target.value)} /></span></td><td>{row.note}</td><td className="cost-total">${row.total.toLocaleString()}</td></tr>)}</tbody><tfoot><tr><td colSpan="7">Total project cost</td><td className="cost-total">${grandTotal.toLocaleString()}</td></tr></tfoot></table></div><div className="cost-stage-rollup"><span className="eyebrow">STAGE ROLL-UP</span>{Object.entries(stageTotals).map(([stage, total]) => <div key={stage}><span>{stage}</span><strong>${total.toLocaleString()}</strong></div>)}</div><div className="panel-note"><span className="note-icon"><BarChart3 size={14} /></span><div><strong>{notice}</strong><span>Cost Layout prototype: edit hours, hourly rates and material costs per activity; labor, row, stage and project totals recalculate immediately.</span></div></div></section>;
+  const rowsWithTotals = costRows.map((row) => {
+    const current = values[row.id];
+    const plannedLabor = current.plannedHours * current.plannedRate;
+    const plannedTotal = plannedLabor + current.plannedMaterials;
+    const spentLabor = current.spentHours * current.spentRate;
+    const spentTotal = spentLabor + current.spentMaterials;
+    return { ...row, ...current, plannedLabor, plannedTotal, spentLabor, spentTotal, variance: spentTotal - plannedTotal, used: plannedTotal ? (spentTotal / plannedTotal) * 100 : 0 };
+  });
+  const stageTotals = rowsWithTotals.reduce((acc, row) => {
+    const stage = acc[row.stage] || { planned: 0, spent: 0, variance: 0 };
+    stage.planned += row.plannedTotal;
+    stage.spent += row.spentTotal;
+    stage.variance += row.variance;
+    acc[row.stage] = stage;
+    return acc;
+  }, {});
+  const plannedTotal = rowsWithTotals.reduce((sum, row) => sum + row.plannedTotal, 0);
+  const spentTotal = rowsWithTotals.reduce((sum, row) => sum + row.spentTotal, 0);
+  const variance = spentTotal - plannedTotal;
+  const spentPercent = plannedTotal ? (spentTotal / plannedTotal) * 100 : 0;
+  const money = (value) => `${value < 0 ? '-$' : '$'}${Math.round(Math.abs(value)).toLocaleString()}`;
+  const varianceClass = (value) => value > 0 ? 'variance-over' : value < 0 ? 'variance-under' : '';
+  const field = (row, name) => <input type="number" min="0" value={row[name]} onChange={(event) => update(row.id, name, event.target.value)} />;
+  return <section className="cost-layout-view">
+    <div className="cost-toolbar"><div><span className="eyebrow">COST LAYOUT | PLANNED VS SPENT</span><h2>Personnel and material cost detail</h2><p>Compare the approved plan with actual spend for every activity, stage, and the project.</p></div><div className="cost-toolbar-actions"><button className="ghost-button" onClick={() => action('Add material cost')}>+ Material cost</button><button className="primary-button" onClick={() => action('Cost report')}>Open cost report</button></div></div>
+    <div className="cost-summary"><div><span>Cost planned</span><strong>{money(plannedTotal)}</strong><small>Budget baseline</small></div><div><span>Cost spent</span><strong>{money(spentTotal)}</strong><small>Recorded actuals</small></div><div><span>Variance (spent − planned)</span><strong className={varianceClass(variance)}>{variance > 0 ? '+' : ''}{money(variance)}</strong><small>{variance > 0 ? 'Over plan' : variance < 0 ? 'Under plan' : 'On plan'}</small></div><div><span>Cost used</span><strong className={varianceClass(variance)}>{spentPercent.toFixed(1)}%</strong><small>Spent ÷ planned</small></div></div>
+    <div className="cost-table-wrap"><table className="cost-table"><thead><tr><th rowSpan="2">Stage</th><th rowSpan="2">Activity</th><th rowSpan="2">Material note</th><th colSpan="5" className="group-planned">Cost planned</th><th colSpan="5" className="group-spent">Cost spent</th><th rowSpan="2">Variance</th><th rowSpan="2">% used</th></tr><tr><th>Hours</th><th>Hourly rate</th><th>Personnel</th><th>Materials</th><th>Total</th><th>Hours</th><th>Hourly rate</th><th>Personnel</th><th>Materials</th><th>Total</th></tr></thead><tbody>{rowsWithTotals.map((row) => <tr key={row.id}><td>{row.stage}</td><td className="cost-activity">{row.activity}</td><td>{row.note}</td><td>{field(row, 'plannedHours')}</td><td><span className="currency-input"><b>$</b>{field(row, 'plannedRate')}</span></td><td>{money(row.plannedLabor)}</td><td><span className="currency-input"><b>$</b>{field(row, 'plannedMaterials')}</span></td><td className="cost-total">{money(row.plannedTotal)}</td><td>{field(row, 'spentHours')}</td><td><span className="currency-input"><b>$</b>{field(row, 'spentRate')}</span></td><td>{money(row.spentLabor)}</td><td><span className="currency-input"><b>$</b>{field(row, 'spentMaterials')}</span></td><td className="cost-total">{money(row.spentTotal)}</td><td className={varianceClass(row.variance)}>{row.variance > 0 ? '+' : ''}{money(row.variance)}</td><td className={varianceClass(row.variance)}>{row.used.toFixed(1)}%</td></tr>)}</tbody><tfoot><tr><td colSpan="13">Total project cost</td><td className={varianceClass(variance)}>{variance > 0 ? '+' : ''}{money(variance)}</td><td className={varianceClass(variance)}>{spentPercent.toFixed(1)}%</td></tr></tfoot></table></div>
+    <div className="cost-stage-rollup"><span className="eyebrow">STAGE ROLL-UP</span>{Object.entries(stageTotals).map(([stage, totals]) => <div key={stage}><span>{stage}</span><strong>Planned {money(totals.planned)} · Spent {money(totals.spent)} · <em className={varianceClass(totals.variance)}>{totals.variance > 0 ? '+' : ''}{money(totals.variance)}</em></strong></div>)}</div>
+    <div className="panel-note"><span className="note-icon"><BarChart3 size={14} /></span><div><strong>{notice}</strong><span>Cost planned is the budget baseline; cost spent is recorded actuals. Variance, percentage used, row totals, stage totals, and project totals recalculate immediately.</span></div></div>
+  </section>;
 }
 
 function ShellDialog({ title, fields, onClose }) { const tabs = title.toLowerCase().includes('activity') ? ['Tracking', 'Columns', 'Links', 'Assignments'] : title.toLowerCase().includes('calendar') ? ['Information', 'Work Calendar', 'Exceptions'] : ['Information', 'Work Calendar', 'Other Columns']; return <div className="dialog-backdrop" role="presentation" onClick={onClose}><div className="shell-dialog" role="dialog" aria-modal="true" aria-label={title} onClick={(e) => e.stopPropagation()}><div className="dialog-title"><strong>{title}</strong><button onClick={onClose} aria-label="Close dialog"><X size={16} /></button></div><div className="dialog-tabs">{tabs.map((tab, i) => <button key={tab} className={i === 0 ? 'active' : ''}>{tab}</button>)}</div><div className="dialog-content">{fields.map((field, i) => <label key={field}><span>{field}</span>{i === 0 && fields.length > 1 ? <select><option>Presentation fixture value</option><option>Future implementation</option></select> : <input value={i === 1 ? '01 Sep 2026' : ''} readOnly placeholder="Shell field" />}</label>)}</div><div className="dialog-actions"><button className="ghost-button" onClick={onClose}>Cancel</button><button className="primary-button" onClick={onClose}>Close</button></div></div></div>; }
