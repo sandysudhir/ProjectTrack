@@ -75,11 +75,44 @@ const ribbonGroups = {
   View: [['Action Columns', Columns3], ['Summary Bars', BarChart3], ['Datelines', Clock3], ['Links', Link2], ['Critical Paths', Activity], ['Alignment Grid', Grid3X3], ['Percent Work Usage', Activity], ['Work Usage', BarChart3], ['Assignments', ClipboardList], ['Show Level', ListFilter], ['Restore All', RefreshCw]],
   Project: [['Project Information', FolderKanban], ['Activity Information', ClipboardList], ['Resource Information', Users], ['Work Calendars', CalendarDays], ['WBS', ListFilter], ['All Bars Range', ArrowUpToLine], ['Timeline Ranges', Clock3], ['Timeline Units', Clock3], ['Layouts', Grid3X3], ['Sorts', ListFilter], ['Filters', ListFilter], ['Restore All', RefreshCw]],
   Tools: [['Spelling', FileText], ['FastSteps', Gauge], ['Define', ClipboardList], ['Get Updates', ArrowDownToLine], ['Save Baseline', ArrowDownToLine], ['Clear Baseline', X], ['Reset Revised', RefreshCw], ['Reset Actual', RefreshCw], ['Column Map', Columns3], ['Shift Items', ArrowUpToLine], ['Shift Schedule', ArrowUpToLine], ['Bring to Front', ArrowUpToLine], ['Send to Back', ArrowDownToLine], ['Arrange', SlidersHorizontal], ['Autofit', Columns3]],
-  Application: [['On the Web', ArrowUpToLine], ['About', CircleHelp], ['Keyboard Shortcuts', HelpCircle], ['Example Files', FileText], ['Tutorial', CircleHelp], ['Tab Workspace', Grid3X3], ['Status Bar', Activity], ['Themes', SlidersHorizontal], ['Toolbars', Columns3], ['Switch Windows', MoreHorizontal], ['Cascade', Grid3X3], ['Tile Horizontally', Columns3], ['Tile Vertically', Columns3]],
+  Application: [['Options', Settings2], ['On the Web', ArrowUpToLine], ['About', CircleHelp], ['Keyboard Shortcuts', HelpCircle], ['Example Files', FileText], ['Tutorial', CircleHelp], ['Tab Workspace', Grid3X3], ['Status Bar', Activity], ['Themes', SlidersHorizontal], ['Toolbars', Columns3], ['Switch Windows', MoreHorizontal], ['Cascade', Grid3X3], ['Tile Horizontally', Columns3], ['Tile Vertically', Columns3]],
 };
 const initialParams = new URLSearchParams(window.location.search);
 const futureCommands = new Set(['Revise','Link','Unlink','Percent','Save Baseline','Clear Baseline','Reset Revised','Reset Actual','Column Map','Get Updates','Shift Items','Shift Schedule','Spelling','Cost Report','Resource Cost Report','Critical Path','Critical Paths','Work Usage','Assignments','WBS','Consolidation','Summary Graph','Gridlines','Header & Footer','Format Selected']);
 const toolNames = new Set(['Arrow','Bar','Link','Revise','Percent','Text Box']);
+
+const layoutPresets = [
+  { name: 'Working Layout', type: 'working', summary: 'Your current working arrangement', columns: 'Saved columns, widths and timeline' },
+  { name: 'Main Layout', type: 'main', summary: 'Standard schedule and Gantt view', columns: 'Activity | Start | Finish | Duration | Status' },
+  { name: 'Main Layout w-Percent Complete', type: 'progress', summary: 'Schedule with graphical completion', columns: 'Activity | Dates | Duration | Status | % Complete' },
+  { name: 'Main Layout - Data Only', type: 'data', summary: 'Dense grid without timeline', columns: 'Activity and scheduling data' },
+  { name: 'Basic Layout', type: 'basic', summary: 'Minimal planning columns', columns: 'Activity | Start | Finish' },
+  { name: 'Resource Layout', type: 'resource', summary: 'Resource rates and assignments', columns: 'Resource | Units | Rate | Work | Cost' },
+  { name: 'Project Layout', type: 'project', summary: 'Project summary and ownership', columns: 'Project | Owner | Start | Finish | Status' },
+  { name: 'Time Layout', type: 'time', summary: 'Time and duration analysis', columns: 'Start | Finish | Duration | Work | Calendar' },
+  { name: 'WBS Layout', type: 'wbs', summary: 'Hierarchical work breakdown', columns: 'WBS | Level | Activity | Parent' },
+  { name: 'Notes Layout', type: 'notes', summary: 'Activity notes and rationale', columns: 'Activity | Notes | Last updated' },
+  { name: 'Images Layout', type: 'images', summary: 'Pictures and visual objects', columns: 'Activity | Image | Caption | Placement' },
+  { name: 'Hyperlinks Layout', type: 'links', summary: 'Referenced URLs and links', columns: 'Activity | Link | Label | Target' },
+  { name: 'Status Layout', type: 'status', summary: 'Health, risk and status signals', columns: 'Activity | Status | Risk | Owner | Updated' },
+  { name: 'Tracking Layout', type: 'tracking', summary: 'Scheduled, revised and actual states', columns: 'Scheduled | Revised | Actual | % Complete' },
+  { name: 'Tracking Baseline 1 Layout', type: 'baseline', summary: 'Variance against Baseline 1', columns: 'Baseline | Current | Variance | Status' },
+  { name: 'Tracking Actuals Layout', type: 'actuals', summary: 'Actual dates and progress', columns: 'Actual start | Actual finish | Actual duration' },
+  { name: 'Cost Layout', type: 'cost', summary: 'Personnel hours, rates and materials', columns: 'Hours | Rate | Labor cost | Materials | Total' },
+  { name: 'Advanced Layout', type: 'advanced', summary: 'Broad scheduling and tracking view', columns: 'Dates | Constraints | Tracking | Links' },
+  { name: 'Advanced Resource Layout', type: 'advanced-resource', summary: 'Capacity, allocation and cost', columns: 'Resource | Capacity | Work | Overtime | Cost' },
+  { name: 'All Columns Layout', type: 'all', summary: 'Every available column', columns: 'All fields with horizontal scrolling' },
+];
+
+const costRows = [
+  { id: 1, stage: 'Industrial design', activity: 'Market research', hours: 24, rate: 75, materials: 1200, note: 'Research samples' },
+  { id: 2, stage: 'Industrial design', activity: 'Concept development', hours: 52, rate: 90, materials: 2800, note: 'Prototype mock-ups' },
+  { id: 3, stage: 'Electronics', activity: 'Architecture', hours: 36, rate: 110, materials: 4500, note: 'Evaluation boards' },
+  { id: 4, stage: 'Electronics', activity: 'Schematic design', hours: 68, rate: 110, materials: 7200, note: 'PCB prototypes' },
+  { id: 5, stage: 'Firmware', activity: 'Core development', hours: 84, rate: 105, materials: 1600, note: 'Test fixtures' },
+  { id: 6, stage: 'Testing & certification', activity: 'Safety testing', hours: 40, rate: 95, materials: 3800, note: 'Certification lab' },
+];
+
 const dialogFields = {
   'Project info': ['Project Calendar', 'Project Start Date', 'Project Start Time', 'Calculated Project Finish Date', 'Calculated Project Finish Time'],
   'Project information': ['Project Calendar', 'Project Start Date', 'Project Start Time', 'Calculated Project Finish Date', 'Calculated Project Finish Time'],
@@ -97,13 +130,101 @@ const dialogFields = {
   'Autofit': ['Autofit Row Height', 'Autofit Column Width', 'Autofit View', 'Autofit Options'],
 };
 
+
+
+const filterPresets = [
+  'Restore All', 'Current Day', 'Current Week', 'Current Month', 'Next Day', 'Next Week',
+  'Critical Items', 'Tasks Not Assigned', 'Revised to Finish Early', 'Revised to Finish Late',
+  '0 - 99% Complete', '100% Complete', 'Should Be 100% Complete', 'Activities Not As Soon As Possible',
+  'Resource 1 - Contractor Management', 'Resource 2 - Project Manager', 'Resource 3 - Contractor Procurement',
+  'Resource 4 - Scheduling Consultant', 'Resource 5 - Contractor Accounting',
+];
+
+function applyFilter(sourceRows, filterName) {
+  if (!filterName || filterName === 'Restore All') return sourceRows;
+  const day = (label) => Number(label?.match(/(\\d{2})/)?.[1] || 0);
+  return sourceRows.filter((row) => {
+    const start = day(row.start); const finish = day(row.finish); const progress = row.progress;
+    if (filterName === 'Current Day') return start <= 10 && finish >= 10;
+    if (filterName === 'Current Week') return start <= 12 && finish >= 6;
+    if (filterName === 'Current Month') return start <= 30 && finish >= 1;
+    if (filterName === 'Next Day') return start <= 11 && finish >= 11;
+    if (filterName === 'Next Week') return start <= 19 && finish >= 13;
+    if (filterName === 'Critical Items') return row.status === 'At risk' || row.type === 'milestone';
+    if (filterName === 'Tasks Not Assigned') return row.type !== 'summary' && row.type !== 'milestone' && row.id % 4 === 0;
+    if (filterName === 'Revised to Finish Early') return row.id % 5 === 0;
+    if (filterName === 'Revised to Finish Late') return row.status === 'At risk' && row.id % 2 === 0;
+    if (filterName === '0 - 99% Complete') return progress < 100;
+    if (filterName === '100% Complete') return progress === 100;
+    if (filterName === 'Should Be 100% Complete') return finish < 10 && progress < 100;
+    if (filterName === 'Activities Not As Soon As Possible') return row.type !== 'summary' && row.id % 5 === 0;
+    if (filterName.startsWith('Resource ')) return row.type !== 'summary' && row.id % 5 === filterPresets.indexOf(filterName) % 5;
+    return true;
+  });
+}
+
+
+function FilterMenu({ current, onSelect, onClose }) {
+  return <div className="dialog-backdrop filter-backdrop" role="presentation" onClick={onClose}><div className="filter-menu" role="dialog" aria-modal="true" aria-label="Filters" onClick={(event) => event.stopPropagation()}><div className="filter-menu-title"><span>Filters</span><button onClick={onClose} aria-label="Close filters"><X size={14} /></button></div><div className="filter-menu-list">{filterPresets.map((filter) => <button key={filter} className={current === filter || (filter === 'Restore All' && current === 'All Activities') ? 'active' : ''} onClick={() => onSelect(filter)}><span className="filter-check">{current === filter || (filter === 'Restore All' && current === 'All Activities') ? '[x]' : '[ ]'}</span>{filter}</button>)}</div><div className="filter-menu-footer"><span>Current: <strong>{current}</strong></span><button className="ghost-button" onClick={onClose}>Close</button></div></div></div>;
+}
+
+function LayoutGallery({ current, onSelect, onClose }) {
+  const [preview, setPreview] = useState(current);
+  const selected = layoutPresets.find((preset) => preset.name === preview) || layoutPresets[0];
+  return <div className="dialog-backdrop" role="presentation" onClick={onClose}><div className="layout-gallery-dialog" role="dialog" aria-modal="true" aria-label="Layouts" onClick={(event) => event.stopPropagation()}>
+    <div className="dialog-title"><div><strong>Layouts</strong><small>Saved view presets for columns, timeline and working geometry</small></div><button onClick={onClose} aria-label="Close layouts"><X size={16} /></button></div>
+    <div className="layout-gallery-body"><aside className="layout-list"><div className="layout-list-heading">LAYOUT PRESETS <span>{layoutPresets.length}</span></div>{layoutPresets.map((preset) => <button key={preset.name} className={preview === preset.name ? 'active' : ''} onClick={() => setPreview(preset.name)}><span className="layout-check">{preview === preset.name ? '[x]' : '[ ]'}</span><span>{preset.name}</span></button>)}</aside><main className="layout-preview"><span className="eyebrow">VISUAL REFERENCE</span><h2>{selected.name}</h2><p>{selected.summary}</p><div className={`layout-preview-canvas ${selected.type}`}><div className="preview-grid-head"><i /><i /><i /><i /><i /></div><div className="preview-grid-body"><span /><span /><span /><span /></div><div className="preview-bars"><i /><i /><i /><b /></div></div><div className="layout-preview-meta"><div><span>Columns</span><strong>{selected.columns}</strong></div><div><span>Stored view state</span><strong>Widths | row height | timeline | toggles</strong></div></div>{selected.type === 'cost' && <div className="layout-callout"><strong>Cost Layout preview</strong><span>Personnel hours x hourly rate + row material costs = row total, with stage and project roll-ups.</span></div>}</main></div>
+    <div className="dialog-actions"><span className="layout-current">Current: <strong>{current}</strong></span><button className="ghost-button" onClick={onClose}>Cancel</button><button className="primary-button" onClick={() => onSelect(preview)}>Apply layout</button></div>
+  </div></div>;
+}
+
+function OptionsDialog({ onClose }) {
+  const tabs = ['General', 'Dates', 'Times', 'Numbers', 'Editing', 'Document', 'AutoSave', 'AutoArchive', 'Update'];
+  const [activeTab, setActiveTab] = useState('General');
+  const [saved, setSaved] = useState(false);
+  const select = (label, values) => <label className="option-control"><span>{label}</span><select>{values.map((value) => <option key={value}>{value}</option>)}</select></label>;
+  const check = (text, checked = false) => <label className="check-line"><input type="checkbox" defaultChecked={checked} />{text}</label>;
+  const radio = (text, group, checked = false) => <label className="radio-line"><input type="radio" name={group} defaultChecked={checked} />{text}</label>;
+  const renderTab = () => {
+    if (activeTab === 'General') return <div className="option-section"><h3>Program Start Options</h3><div className="option-columns"><div>{radio('Show Getting Started... Dialog', 'program', true)}{radio('Open Most Recent Schedule', 'program')}{radio('Create New Schedule', 'program')}{radio('Show Open... Dialog', 'program')}{radio('Show Menus Only', 'program')}</div><div>{select('Number of recent files', ['15', '10', '5'])}<button className="subtle-button">Clear All</button><button className="subtle-button">Reset All Warnings</button></div></div>{check('Follow system personalization default app mode', true)}<h3>New Schedule Defaults</h3>{radio('Capture Current', 'defaults')}{radio('Restore to Factory', 'defaults')}{radio('No Change', 'defaults', true)}</div>;
+    if (activeTab === 'Dates') return <div className="option-section"><div className="option-columns">{select('Date Format', ['Short', 'Long', 'Custom'])}{select('Date Order', ['mm/dd/yy', 'dd/mm/yy', 'yy-mm-dd'])}{select('Week Starts on', ['Sunday', 'Monday'])}{select('Weekday Placement', ['Before', 'After'])}</div><h3>Display</h3><div className="date-options"><span>Weekday: <b>None</b></span><span>Month: <b>9</b> | Sept | September</span><span>Day: <b>1</b> | 01 | None</span><span>Year: <b>2026</b> | 26 | None</span></div><h3>Separators</h3><div className="separator-preview">Weekday <input /> Month <input defaultValue="/" /> Day <input defaultValue="/" /> Year</div><div className="example-line">Example: 9/1/2026</div></div>;
+    if (activeTab === 'Times') return <div className="option-section"><div className="option-columns">{select('Time Format', ['12 Hours', '24 Hours'])}{radio('2:06 AM example', 'time', true)}</div><h3>12 Hours Display</h3>{radio('2 hours', 'hours', true)}{radio('02 hours', 'hours')}{radio('06 minutes', 'minutes', true)}{radio('None for minutes', 'minutes')}</div>;
+    if (activeTab === 'Numbers') return <div className="option-section"><h3>Display</h3><div className="option-columns"><label className="option-control"><span>Decimal Point</span><input defaultValue="." /></label><label className="option-control"><span>Thousands Separator</span><input defaultValue="," /></label><label className="option-control"><span>List Separator</span><input defaultValue="," /></label></div><div className="example-line">Example: 1,234,567.89</div></div>;
+    if (activeTab === 'Editing') return <div className="option-section"><h3>Row Resizing</h3>{radio('Action Column Only', 'resize', true)}{radio('Data and Action Columns', 'resize')}<h3>Baseline Editing</h3>{check('Allow editing of baseline data') }<h3>Imported Files</h3>{check('Autofit Schedule after Importing XML Files', true)}<h3>Printing</h3>{check('Use Legacy Print Dialog')}</div>;
+    if (activeTab === 'Document') return <div className="option-section"><h3>Document Properties</h3>{check('Prompt for document properties on first save')}<h3>Additional Save Options</h3>{radio('Always save Microsoft Project XML (.xml)', 'save')}{radio('Always save the originally opened type', 'save')}{radio('None', 'save', true)}{check('Use stringent writability test for open files', true)}</div>;
+    if (activeTab === 'AutoSave') return <div className="option-section"><h3>AutoSave Options</h3>{check('Save all open documents every 120 minutes')}{check('Prompt before saving')}<h3>AutoRecover Options</h3><label className="option-control"><span>Discard AutoRecover files older than</span><input type="number" defaultValue="10" /></label></div>;
+    if (activeTab === 'AutoArchive') return <div className="option-section">{check('Enable AutoArchive', true)}<h3>AutoArchive Options</h3>{check('Archive when an enabled document is closed', true)}{check('Archive enabled documents every 1 hour', true)}<label className="option-control"><span>Default AutoArchive location</span><input defaultValue="C:\\Users\\baps\\Documents\\ProjectTrack Archives" /></label></div>;
+    return <div className="option-section"><h3>Update Options</h3>{check('Check for updates when ProjectTrack starts', true)}{check('Include preview builds')}<p className="option-help">Updates are shown for review and never installed without user approval.</p></div>;
+  };
+  return <div className="dialog-backdrop" role="presentation" onClick={onClose}><div className="options-dialog" role="dialog" aria-modal="true" aria-label="ProjectTrack Options" onClick={(event) => event.stopPropagation()}><div className="dialog-title"><div><strong>ProjectTrack Options</strong><small>Application defaults and document behavior</small></div><button onClick={onClose} aria-label="Close options"><X size={16} /></button></div><div className="options-tabs">{tabs.map((tab) => <button key={tab} className={activeTab === tab ? 'active' : ''} onClick={() => { setActiveTab(tab); setSaved(false); }}>{tab}</button>)}</div><div className="options-content">{renderTab()}</div><div className="dialog-actions"><span className="layout-current">{saved ? 'Options staged for this workspace' : 'Changes are local until saved'}</span><button className="ghost-button" onClick={onClose}>Cancel</button><button className="primary-button" onClick={() => setSaved(true)}>OK</button></div></div></div>;
+}
+
+
+function StatusLayoutView({ rows, notice }) {
+  const statusRows = rows.slice(0, 22);
+  return <section className="status-layout-view"><div className="status-layout-heading"><div><span className="eyebrow">STATUS LAYOUT | VISUAL REFERENCE</span><h2>Actuals and schedule status</h2><p>Actual duration, actual dates, completion, usage and status remain visible beside the timeline.</p></div><div className="status-legend"><span><i className="status-dot green" /> Complete</span><span><i className="status-dot amber" /> Behind schedule</span><span><i className="status-dot blue" /> Not started</span></div></div><div className="status-layout-body"><div className="status-grid"><div className="status-grid-head"><span>#</span><span>Activity Name</span><span>Actual Duration (Hours)</span><span>Actual Start Date</span><span>Actual Finish Date</span><span>% Complete</span><span>% Used</span><span>Status</span></div>{statusRows.map((row) => { const plannedDays = parseInt(row.duration, 10) || 0; const actualHours = plannedDays * 8 * (row.progress / 100); return <div className="status-grid-row" key={row.id}><span>{row.id}</span><span className="status-activity">{row.name}</span><span className="actual-hours">{actualHours.toFixed(2)}</span><span>{row.progress ? row.start : ''}</span><span>{row.progress === 100 ? row.finish : ''}</span><span className="status-percent">{row.progress}%</span><span>100%</span><span className={row.status === 'At risk' || row.progress === 0 ? 'behind' : row.status === 'Complete' ? 'done' : ''}>{row.progress === 0 ? 'Not Started - Behind Schedule' : row.status}</span></div>; })}</div><div className="status-timeline"><div className="status-timeline-head">July 2026 <span>August 2026</span><span>September 2026</span><span>October 2026</span></div>{statusRows.map((row) => <div className="status-timeline-row" key={row.id}><div className={`status-bar ${row.color}`} style={{ left: `${(row.bar[0] / 30) * 100}%`, width: `${Math.max(2, ((row.bar[1] - row.bar[0] + 1) / 30) * 100)}%` }} /><span>{row.name}</span></div>)}</div></div><div className="panel-note"><span className="note-icon"><Activity size={14} /></span><div><strong>{notice}</strong><span>Status Layout prototype matches the reference columns; actuals and usage become engine-backed in the tracking phase.</span></div></div></section>;
+}
+
+function CostLayoutView({ action, notice }) {
+  const [values, setValues] = useState(() => Object.fromEntries(costRows.map((row) => [row.id, { hours: row.hours, rate: row.rate, materials: row.materials }])));
+  const update = (id, field, raw) => setValues((current) => ({ ...current, [id]: { ...current[id], [field]: Number(raw) || 0 } }));
+  const rowsWithTotals = costRows.map((row) => ({ ...row, ...values[row.id], labor: values[row.id].hours * values[row.id].rate, total: values[row.id].hours * values[row.id].rate + values[row.id].materials }));
+  const stageTotals = rowsWithTotals.reduce((acc, row) => { acc[row.stage] = (acc[row.stage] || 0) + row.total; return acc; }, {});
+  const grandTotal = rowsWithTotals.reduce((sum, row) => sum + row.total, 0);
+  return <section className="cost-layout-view"><div className="cost-toolbar"><div><span className="eyebrow">COST LAYOUT | VISUAL REFERENCE</span><h2>Personnel and material cost detail</h2><p>Every activity carries hours, hourly rate, labor cost, material cost and a row total.</p></div><div className="cost-toolbar-actions"><button className="ghost-button" onClick={() => action('Add material cost')}>+ Material cost</button><button className="primary-button" onClick={() => action('Cost report')}>Open cost report</button></div></div><div className="cost-summary"><div><span>Personnel labor</span><strong>${rowsWithTotals.reduce((sum, row) => sum + row.labor, 0).toLocaleString()}</strong></div><div><span>Materials</span><strong>${rowsWithTotals.reduce((sum, row) => sum + row.materials, 0).toLocaleString()}</strong></div><div><span>Project total</span><strong>${grandTotal.toLocaleString()}</strong></div></div><div className="cost-table-wrap"><table className="cost-table"><thead><tr><th>Stage</th><th>Activity</th><th>Hours</th><th>Hourly rate</th><th>Personnel cost</th><th>Material cost</th><th>Material note</th><th>Row total</th></tr></thead><tbody>{rowsWithTotals.map((row) => <tr key={row.id}><td>{row.stage}</td><td className="cost-activity">{row.activity}</td><td><input type="number" min="0" value={row.hours} onChange={(event) => update(row.id, 'hours', event.target.value)} /></td><td><span className="currency-input"><b>$</b><input type="number" min="0" value={row.rate} onChange={(event) => update(row.id, 'rate', event.target.value)} /></span></td><td>${row.labor.toLocaleString()}</td><td><span className="currency-input"><b>$</b><input type="number" min="0" value={row.materials} onChange={(event) => update(row.id, 'materials', event.target.value)} /></span></td><td>{row.note}</td><td className="cost-total">${row.total.toLocaleString()}</td></tr>)}</tbody><tfoot><tr><td colSpan="7">Total project cost</td><td className="cost-total">${grandTotal.toLocaleString()}</td></tr></tfoot></table></div><div className="cost-stage-rollup"><span className="eyebrow">STAGE ROLL-UP</span>{Object.entries(stageTotals).map(([stage, total]) => <div key={stage}><span>{stage}</span><strong>${total.toLocaleString()}</strong></div>)}</div><div className="panel-note"><span className="note-icon"><BarChart3 size={14} /></span><div><strong>{notice}</strong><span>Cost Layout prototype: edit hours, hourly rates and material costs per activity; labor, row, stage and project totals recalculate immediately.</span></div></div></section>;
+}
+
 function ShellDialog({ title, fields, onClose }) { const tabs = title.toLowerCase().includes('activity') ? ['Tracking', 'Columns', 'Links', 'Assignments'] : title.toLowerCase().includes('calendar') ? ['Information', 'Work Calendar', 'Exceptions'] : ['Information', 'Work Calendar', 'Other Columns']; return <div className="dialog-backdrop" role="presentation" onClick={onClose}><div className="shell-dialog" role="dialog" aria-modal="true" aria-label={title} onClick={(e) => e.stopPropagation()}><div className="dialog-title"><strong>{title}</strong><button onClick={onClose} aria-label="Close dialog"><X size={16} /></button></div><div className="dialog-tabs">{tabs.map((tab, i) => <button key={tab} className={i === 0 ? 'active' : ''}>{tab}</button>)}</div><div className="dialog-content">{fields.map((field, i) => <label key={field}><span>{field}</span>{i === 0 && fields.length > 1 ? <select><option>Presentation fixture value</option><option>Future implementation</option></select> : <input value={i === 1 ? '01 Sep 2026' : ''} readOnly placeholder="Shell field" />}</label>)}</div><div className="dialog-actions"><button className="ghost-button" onClick={onClose}>Cancel</button><button className="primary-button" onClick={onClose}>Close</button></div></div></div>; }
 
 function App() {
   const [activeProject, setActiveProject] = useState(initialParams.get('project') || 'all');
   const [activeNav, setActiveNav] = useState(initialParams.get('nav') || 'Schedule');
   const [ribbon, setRibbon] = useState(initialParams.get('ribbon') || 'Home');
-  const [layout, setLayout] = useState('Standard');
+  const [layout, setLayout] = useState('Main Layout');
+  const [layoutGallery, setLayoutGallery] = useState(false);
+  const [optionsOpen, setOptionsOpen] = useState(false);
+  const [filterMenu, setFilterMenu] = useState(false);
+  const [filterName, setFilterName] = useState('All Activities');
   const [density, setDensity] = useState('Compact');
   const [zoom, setZoom] = useState(100);
   const [query, setQuery] = useState('');
@@ -116,13 +237,15 @@ function App() {
   const [activeTool, setActiveTool] = useState('Arrow');
   const [lockedTool, setLockedTool] = useState(null);
 
-  const filteredRows = useMemo(() => rows.filter((row) => !query || row.name.toLowerCase().includes(query.toLowerCase())), [query]);
+  const filteredRows = useMemo(() => applyFilter(rows.filter((row) => !query || row.name.toLowerCase().includes(query.toLowerCase())), filterName), [query, filterName]);
   const visibleRows = outlineMode === 'compact' ? filteredRows.filter((row) => row.level === 0 || row.type === 'milestone') : outlineMode === 'selective' ? filteredRows.filter((row) => row.level <= 1 || row.type === 'milestone') : filteredRows;
   const showCalendar = activeNav === 'Calendar';
   const showResource = activeNav === 'Resource';
+  const showCost = layout === 'Cost Layout';
+  const showStatus = layout === 'Status Layout';
 
   const action = (label) => { setNotice(`${label} · shell command ready`); const key = Object.keys(dialogFields).find((name) => label.toLowerCase().includes(name.toLowerCase())); if (key) setDialog({ title: label, fields: dialogFields[key] }); };
-  const chooseTool = (label) => { if (toolNames.has(label)) { setActiveTool(label); setNotice(`${label} tool selected`); } else if (label === 'Lock Tool') { setLockedTool((current) => { const next = current ? null : activeTool; setNotice(next ? `${next} tool locked for repeated use` : 'Tool lock released'); return next; }); } else action(label); };
+  const chooseTool = (label) => { if (toolNames.has(label)) { setActiveTool(label); setNotice(`${label} tool selected`); } else if (label === 'Lock Tool') { setLockedTool((current) => { const next = current ? null : activeTool; setNotice(next ? `${next} tool locked for repeated use` : 'Tool lock released'); return next; }); } else if (label === 'Layouts') { setLayoutGallery(true); setNotice('Layouts gallery opened'); } else if (label === 'Filters') { setFilterMenu(true); setNotice('Filters menu opened'); } else if (label === 'Options') { setOptionsOpen(true); setNotice('Options opened'); } else action(label); };
   const toggleExpanded = () => { const next = !expanded; setExpanded(next); setOutlineMode(next ? 'expanded' : 'compact'); setNotice(next ? 'Hierarchy expanded' : 'Hierarchy compacted'); };
 
   return <div className="app-shell">
@@ -133,7 +256,7 @@ function App() {
 
     <nav className="workspace-tabs" aria-label="Project tabs">
       <div className="tabs-left">{projects.map((project) => <button key={project.id} className={`workspace-tab ${activeProject === project.id ? 'active' : ''}`} onClick={() => { setActiveProject(project.id); setNotice(`${project.label} opened`); }}>{project.label}{project.id === 'all' && <span className="tab-count">3</span>}</button>)}<button className="add-tab" onClick={() => action('New project tab')}><Plus size={15} /></button></div>
-      <div className="workspace-tools"><label className="layout-label">Layout <select value={layout} onChange={(e) => { setLayout(e.target.value); setNotice(`Layout ${e.target.value} selected`); }}><option>Standard</option><option>Executive</option><option>Review</option></select><ChevronDown size={13} /></label><div className="search-box"><Search size={15} /><input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Search workspace" /><kbd>Ctrl K</kbd>{query && <button onClick={() => setQuery('')}><X size={13} /></button>}</div></div>
+      <div className="workspace-tools"><button className="layout-picker" onClick={() => setLayoutGallery(true)}><Grid3X3 size={13} /><span>Layout</span><strong>{layout}</strong><ChevronDown size={13} /></button><div className="search-box"><Search size={15} /><input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Search workspace" /><kbd>Ctrl K</kbd>{query && <button onClick={() => setQuery('')}><X size={13} /></button>}</div></div>
     </nav>
 
     <div className="ribbon-tabs">{Object.keys(ribbonGroups).map((name) => <button key={name} className={ribbon === name ? 'active' : ''} onClick={() => setRibbon(name)}>{name}</button>)}<div className="ribbon-spacer" /><button className="mode-button" onClick={() => setMode(mode === 'populated' ? 'loading' : 'populated')}><span className={`state-dot ${mode}`} /> {mode === 'loading' ? 'Loading preview' : 'Workspace ready'}</button></div>
@@ -154,12 +277,15 @@ function App() {
       <main className="main-content">
         <div className="view-header"><div><div className="breadcrumb">{activeProject === 'all' ? 'ALL PROJECTS' : projects.find((p) => p.id === activeProject)?.label.toUpperCase()} <ChevronRight size={13} /> {activeNav.toUpperCase()}</div><h1>{showCalendar ? 'Calendar' : showResource ? 'Resource planning' : 'Schedule'}</h1><p>{showCalendar ? 'Wall calendar projection across shared project weeks.' : showResource ? 'Resource load and assignment structure across the workspace.' : 'Plan, inspect and coordinate work across your project portfolio.'}</p></div><div className="view-actions"><button className="ghost-button" onClick={() => action('Refresh view')}><RefreshCw size={15} /> Refresh</button><button className="primary-button" onClick={() => action('New row')}><Plus size={15} /> New row</button></div></div>
         {mode === 'loading' ? <div className="state-panel"><RefreshCw size={25} className="spin" /><h2>Loading workspace</h2><p>Preparing the deterministic sample fixture…</p></div> : <>
-          {showCalendar ? <CalendarPlaceholder notice={notice} action={action} /> : showResource ? <ResourcePlaceholder notice={notice} action={action} /> : <ScheduleView rows={visibleRows} leftWidth={leftWidth} setLeftWidth={setLeftWidth} density={density} setDensity={setDensity} zoom={zoom} setZoom={setZoom} expanded={expanded} outlineMode={outlineMode} setOutlineMode={(next) => { setOutlineMode(next); setExpanded(next !== 'compact'); }} action={action} notice={notice} />}
+          {showCost ? <CostLayoutView notice={notice} action={action} /> : showStatus ? <StatusLayoutView rows={filteredRows} notice={notice} /> : showCalendar ? <CalendarPlaceholder notice={notice} action={action} /> : showResource ? <ResourcePlaceholder notice={notice} action={action} /> : <ScheduleView rows={visibleRows} leftWidth={leftWidth} setLeftWidth={setLeftWidth} density={density} setDensity={setDensity} zoom={zoom} setZoom={setZoom} expanded={expanded} outlineMode={outlineMode} setOutlineMode={(next) => { setOutlineMode(next); setExpanded(next !== 'compact'); }} action={action} notice={notice} />}
         </>}
       </main>
     </div>
     {dialog && <ShellDialog title={dialog.title} fields={dialog.fields} onClose={() => setDialog(null)} />}
-    <footer className="statusbar"><div><span className="status-led" />{notice}</div><div className="status-center">Tool: {activeTool}{lockedTool ? ` · ${lockedTool} locked` : ''} · {filteredRows.length} rows · {projects.length - 1} projects · Last saved just now</div><div className="status-right"><span>Zoom {zoom}%</span><button onClick={() => setZoom(Math.max(60, zoom - 10))}>−</button><button onClick={() => setZoom(Math.min(160, zoom + 10))}>＋</button><span className="connection"><span className="status-led green" />Local workspace</span></div></footer>
+    {layoutGallery && <LayoutGallery current={layout} onSelect={(next) => { setLayout(next); setLayoutGallery(false); setNotice(`Layout ${next} applied`); }} onClose={() => setLayoutGallery(false)} />}
+    {optionsOpen && <OptionsDialog onClose={() => setOptionsOpen(false)} />}
+    {filterMenu && <FilterMenu current={filterName} onSelect={(next) => { setFilterName(next === 'Restore All' ? 'All Activities' : next); setFilterMenu(false); setNotice(`${next === 'Restore All' ? 'All activities' : next} filter applied`); }} onClose={() => setFilterMenu(false)} />}
+    <footer className="statusbar"><div><span className="status-led" />{notice}</div><div className="status-center">Tool: {activeTool}{lockedTool ? ` · ${lockedTool} locked` : ''} · Filter: {filterName} · {filteredRows.length} rows · {projects.length - 1} projects · Last saved just now</div><div className="status-right"><span>Zoom {zoom}%</span><button onClick={() => setZoom(Math.max(60, zoom - 10))}>−</button><button onClick={() => setZoom(Math.min(160, zoom + 10))}>＋</button><span className="connection"><span className="status-led green" />Local workspace</span></div></footer>
   </div>;
 }
 
@@ -213,4 +339,3 @@ function ResourcePlaceholder({ action, notice }) { const resources = [['Database
 function CalendarPlaceholder({ action, notice }) { const weeks = [['30 Aug','31 Aug','01 Sep','02 Sep','03 Sep','04 Sep','05 Sep'],['06 Sep','07 Sep','08 Sep','09 Sep','10 Sep','11 Sep','12 Sep'],['13 Sep','14 Sep','15 Sep','16 Sep','17 Sep','18 Sep','19 Sep'],['20 Sep','21 Sep','22 Sep','23 Sep','24 Sep','25 Sep','26 Sep'],['27 Sep','28 Sep','29 Sep','30 Sep','01 Oct','02 Oct','03 Oct']]; return <section className="placeholder-view"><div className="placeholder-toolbar"><button className="toolbar-button active"><CalendarDays size={15} /> Wall calendar</button><button className="toolbar-button" onClick={() => action('Week range')}><Clock3 size={15} /> Week</button><button className="toolbar-button" onClick={() => action('Month range')}>Month</button><span className="range-label">September 2026 <ChevronDown size={13} /></span></div><div className="calendar-board"><div className="calendar-side"><span className="eyebrow">SHARED TIMELINE</span><h2>September 2026</h2><p>Continuous wall-calendar view across Orion, Atlas and Delta project weeks.</p><div className="calendar-key"><span><i className="key-dot blue" /> Planned</span><span><i className="key-dot amber" /> At risk</span><span><i className="key-dot green" /> Complete</span></div></div><div className="month-grid"><div className="weekday-row">{['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'].map((day) => <span key={day}>{day}</span>)}</div>{weeks.map((week, wi) => <div className="calendar-week" key={wi}>{week.map((day, di) => <div className="calendar-day" key={day}><div className="day-title">{day}</div>{wi === 1 && di === 1 && <div className="calendar-event blue"><strong>Architecture</strong><span>Orion Program</span></div>}{wi === 2 && di === 1 && <div className="calendar-event amber"><strong>Build</strong><span>Atlas Program</span></div>}{wi === 3 && di === 2 && <div className="calendar-event green"><strong>Feasibility</strong><span>Complete</span></div>}{wi === 3 && di === 5 && <div className="calendar-milestone"><Gauge size={13} /> Publish milestone</div>}{wi === 4 && di === 4 && <div className="calendar-event blue"><strong>Handover</strong><span>Delta Release</span></div>}</div>)}</div>)}</div></div><div className="panel-note"><span className="note-icon"><CalendarDays size={14} /></span><div><strong>{notice}</strong><span>Wall-calendar projection is ready for visual review; editing semantics remain outside P02.</span></div></div></section>; }
 
 createRoot(document.getElementById('root')).render(<App />);
-
