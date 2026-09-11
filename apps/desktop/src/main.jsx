@@ -378,8 +378,9 @@ function App() {
   const action = (label) => {
     if (label === 'Add project') { setProjectDialogOpen(true); return; }
     if (label === 'Manage workspace') { setDialog({ title: 'Manage projects', fields: ['Project list', 'Select a project to inspect details'] }); return; }
+    if (label === 'Schedule' || label === 'Calendar' || label === 'Resource') { setActiveNav(label); setNotice(`${label} view opened`); return; }
     if (label === 'New row') { setNewRowOpen(true); return; }
-    if (label === 'Save') { localStorage.setItem('projecttrack-last-save', 'projecttrack-risks', new Date().toISOString()); setNotice('Workspace saved locally'); return; }
+    if (label === 'Save') { localStorage.setItem('projecttrack-last-save', new Date().toISOString()); setNotice('Workspace saved locally'); return; }
     if (label === 'Open') { setNotice('Workspace restored from this browser'); return; }
     setNotice(`${label} · shell command ready`); const key = Object.keys(dialogFields).find((name) => label.toLowerCase().includes(name.toLowerCase())); if (key) setDialog({ title: label, fields: dialogFields[key] });
   };
