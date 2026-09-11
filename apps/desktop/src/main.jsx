@@ -460,7 +460,7 @@ function ScheduleView({ rows, leftWidth, setLeftWidth, density, setDensity, zoom
   useEffect(() => { localStorage.setItem('projecttrack-rationales', JSON.stringify(rationales)); }, [rationales]);
   useEffect(() => { localStorage.setItem('projecttrack-links', JSON.stringify(links)); }, [links]);
   useEffect(() => { localStorage.setItem('projecttrack-risks', JSON.stringify(risks)); }, [risks]);
-  const markRisk = (row, severity, points) => { setRisks((current) => ({ ...current, [row.id]: severity === 'none' ? undefined : { severity, points: Number(points) || 0 } })); setRiskMenu(null); action(${row.name} risk marked ); };
+  const markRisk = (row, severity, points) => { setRisks((current) => ({ ...current, [row.id]: severity === 'none' ? undefined : { severity, points: Number(points) || 0 } })); setRiskMenu(null); action(row.name + ' risk marked ' + severity); };
   const beginResize = (event, row, edge) => {
     if (row.type === 'milestone' || activeTool === 'Link') return;
     event.preventDefault(); event.stopPropagation();
