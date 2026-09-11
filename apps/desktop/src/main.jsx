@@ -648,7 +648,7 @@ const authUsers = [
 function ResourcePlaceholder({ action, notice, onOpenSchedule, projectLabel = 'All Projects', rows = [] }) {
   const [workWeek, setWorkWeek] = useState('5-day');
   const [selectedActivity, setSelectedActivity] = useState(null);
-  const days = ['01 Sep','02 Sep','03 Sep','04 Sep','05 Sep','06 Sep','07 Sep','08 Sep','09 Sep','10 Sep','11 Sep','12 Sep','13 Sep','14 Sep'];
+  const days = Array.from({ length: 30 }, (_, index) => { const date = new Date(2026, 8, index + 1); return date.toLocaleDateString('en-GB', { day: '2-digit', month: 'short' }).replace(/^0/, ''); });
   const workingDay = (index) => { const dayOfWeek = (2 + index) % 7; return workWeek == '5-day' ? dayOfWeek != 0 && dayOfWeek != 6 : dayOfWeek != 0; };
   const scoped = projectLabel === 'All Projects' ? resourceLoads : resourceLoads.map((r) => ({ ...r, projects: r.projects.filter(([p]) => p === projectLabel) })).filter((r) => r.projects.length);
   const scheduleRows = rows.length ? rows : allProjectRows;
@@ -657,7 +657,7 @@ function ResourcePlaceholder({ action, notice, onOpenSchedule, projectLabel = 'A
     const assignments = resource.activities.map((activity, index) => {
       const match = scheduleRows.find((row) => String(row.name).toLowerCase().includes(activity.toLowerCase().split(' ')[0]));
       const start = Math.max(1, dayNumber(match?.start) || (index * 2 + 1));
-      const finish = Math.min(14, dayNumber(match?.finish) || start + 2);
+      const finish = Math.min(days.length, dayNumber(match?.finish) || start + 2);
       return { activity, start, finish, hours: Math.min(8, Math.max(4, Math.round(resource.hours / Math.max(1, resource.activities.length * 4)))) };
     });
     const daily = days.map((_, i) => workingDay(i) ? assignments.filter((a) => i + 1 >= a.start && i + 1 <= a.finish).reduce((sum, a) => sum + a.hours, 0) : 0);
