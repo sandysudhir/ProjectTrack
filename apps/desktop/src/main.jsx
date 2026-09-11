@@ -648,7 +648,7 @@ const authUsers = [
 function ResourcePlaceholder({ action, notice, onOpenSchedule, projectLabel = 'All Projects', rows = [] }) {
   const [workWeek, setWorkWeek] = useState('5-day');
   const [selectedActivity, setSelectedActivity] = useState(null);
-  const days = Array.from({ length: 30 }, (_, index) => { const date = new Date(2026, 8, index + 1); return date.toLocaleDateString('en-GB', { day: '2-digit', month: 'short' }).replace(/^0/, ''); });
+  const days = Array.from({ length: 61 }, (_, index) => { const date = new Date(2026, 8, index + 1); return date.toLocaleDateString('en-GB', { day: '2-digit', month: 'short' }).replace(/^0/, ''); });
   const workingDay = (index) => { const dayOfWeek = (2 + index) % 7; return workWeek == '5-day' ? dayOfWeek != 0 && dayOfWeek != 6 : dayOfWeek != 0; };
   const scoped = projectLabel === 'All Projects' ? resourceLoads : resourceLoads.map((r) => ({ ...r, projects: r.projects.filter(([p]) => p === projectLabel) })).filter((r) => r.projects.length);
   const scheduleRows = rows.length ? rows : allProjectRows;
