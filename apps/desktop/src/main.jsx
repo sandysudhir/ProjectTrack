@@ -655,7 +655,7 @@ function ResourcePlaceholder({ action, notice, projectLabel = 'All Projects', ro
       const match = scheduleRows.find((row) => String(row.name).toLowerCase().includes(activity.toLowerCase().split(' ')[0]));
       const start = Math.max(1, dayNumber(match?.start) || (index * 2 + 1));
       const finish = Math.min(14, dayNumber(match?.finish) || start + 2);
-      return { activity, start, finish, hours: Math.max(4, Math.round((resource.hours / Math.max(1, resource.activities.length)) / 2)) };
+      return { activity, start, finish, hours: Math.min(8, Math.max(4, Math.round(resource.hours / Math.max(1, resource.activities.length * 4)))) };
     });
     const daily = days.map((_, i) => assignments.filter((a) => i + 1 >= a.start && i + 1 <= a.finish).reduce((sum, a) => sum + a.hours, 0));
     return { ...resource, assignments, daily };
