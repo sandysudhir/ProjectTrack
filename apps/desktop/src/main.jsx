@@ -286,7 +286,7 @@ function ProjectFilesView({ projectId, mode, files, onAddFile, onAddComment, not
   const search = (fileQuery || globalQuery).trim().toLowerCase();
   const visible = search ? modeFiles.filter((file) => (file.name + ' ' + file.meta).toLowerCase().includes(search)) : modeFiles;
   const heading = mode === 'Comments' ? 'Project comments' : mode === 'Attachments' ? 'Project attachments' : 'Project documents';
-  return <section className="placeholder-view project-files-view"><div className="placeholder-toolbar"><button className="toolbar-button active"><ClipboardList size={15} /> {heading}</button><label className="inline-search"><Search size={14} /><input value={fileQuery} onChange={(event) => setFileQuery(event.target.value)} placeholder={`Search ${mode.toLowerCase()}…`} /></label><span className="range-label">{projectId === 'all' ? 'All projects · grouped by project' : projects.find((p) => p.id === projectId)?.label}</span></div><div className="files-grid"><div className="files-list"><div className="files-list-head"><strong>{visible.length} items</strong>{projectId === 'all' && <span>Each item retains its project</span>}</div>{visible.length === 0 && <div className="empty-files">No {mode.toLowerCase()} yet for this project.</div>}{visible.map((file) => <article className="file-card" key={file.id}><div className={`file-icon ${file.kind}`}><FileText size={16} /></div><div><strong>{file.name}</strong><span>{projects.find((p) => p.id === file.projectId)?.label || 'Project'} · {file.meta}</span></div></article>)}</div><div className="files-inspector"><span className="eyebrow">ADD TO {projectId === 'all' ? 'A PROJECT' : projects.find((p) => p.id === projectId)?.label.toUpperCase()}</span>{mode !== 'Comments' && <><label className="file-input"><span>{mode === 'Attachments' ? 'Add attachment' : 'Add document'}</span><input type="file" onChange={(event) => { const selected = event.target.files?.[0]; if (selected) onAddFile({ kind: mode === 'Attachments' ? 'attachment' : 'document', name: selected.name, meta: `${selected.type || 'file'} · ${Math.round(selected.size / 1024)} KB` }); }} /></label><label><span>Add link</span><input value={link} onChange={(event) => setLink(event.target.value)} placeholder="https://…" /></label><button className="primary-button" onClick={() => { if (link.trim()) { onAddFile({ kind: 'link', name: link.trim(), meta: link.trim() }); setLink(''); } }}>Add link</button></>}{mode !== 'Attachments' && <><label><span>Comment</span><textarea value={comment} onChange={(event) => setComment(event.target.value)} placeholder="Add a project comment…" /></label><button className="primary-button" onClick={() => { if (comment.trim()) { onAddComment(comment.trim()); setComment(''); } }}>Add comment</button></>}</div></div><div className="panel-note"><span className="note-icon"><ClipboardList size={14} /></span><div><strong>{notice}</strong><span>Documents, links, comments and attachments stay scoped to their project; All Projects groups them without changing ownership.</span></div></div></section>;
+  return <section className="placeholder-view project-files-view"><div className="placeholder-toolbar"><button className="toolbar-button active"><ClipboardList size={15} /> {heading}</button><label className="inline-search"><Search size={14} /><input value={fileQuery} onChange={(event) => setFileQuery(event.target.value)} placeholder={`Search ${mode.toLowerCase()}…`} /></label><span className="range-label">{projectId === 'all' ? 'All projects · grouped by project' : projects.find((p) => p.id === projectId)?.label}</span></div><div className="files-grid"><div className="files-list"><div className="files-list-head"><strong>{visible.length} items</strong>{projectId === 'all' && <span>Each item retains its project</span>}</div>{visible.length === 0 && <div className="empty-files">No {mode.toLowerCase()} yet for this project.</div>}{visible.map((file) => <article className="file-card" key={file.id}><div className={`file-icon ${file.kind}`}><FileText size={16} /></div><div>{file.kind === 'link' ? <a className="file-link" href={file.meta} target="_blank" rel="noreferrer">{file.name}</a> : <strong>{file.name}</strong>}<span>{projects.find((p) => p.id === file.projectId)?.label || 'Project'} · {file.meta}</span></div></article>)}</div><div className="files-inspector"><span className="eyebrow">ADD TO {projectId === 'all' ? 'A PROJECT' : projects.find((p) => p.id === projectId)?.label.toUpperCase()}</span>{mode !== 'Comments' && <><label className="file-input"><span>{mode === 'Attachments' ? 'Add attachment' : 'Add document'}</span><input type="file" onChange={(event) => { const selected = event.target.files?.[0]; if (selected) onAddFile({ kind: mode === 'Attachments' ? 'attachment' : 'document', name: selected.name, meta: `${selected.type || 'file'} · ${Math.round(selected.size / 1024)} KB` }); }} /></label><label><span>Add link</span><input value={link} onChange={(event) => setLink(event.target.value)} placeholder="https://…" /></label><button className="primary-button" onClick={() => { if (link.trim()) { onAddFile({ kind: 'link', name: link.trim(), meta: link.trim() }); setLink(''); } }}>Add link</button></>}{mode !== 'Attachments' && <><label><span>Comment</span><textarea value={comment} onChange={(event) => setComment(event.target.value)} placeholder="Add a project comment…" /></label><button className="primary-button" onClick={() => { if (comment.trim()) { onAddComment(comment.trim()); setComment(''); } }}>Add comment</button></>}</div></div><div className="panel-note"><span className="note-icon"><ClipboardList size={14} /></span><div><strong>{notice}</strong><span>Documents, links, comments and attachments stay scoped to their project; All Projects groups them without changing ownership.</span></div></div></section>;
 }
 
 function NewRowDialog({ projectId, onClose, onCreate }) {
@@ -311,6 +311,11 @@ function NewRowDialog({ projectId, onClose, onCreate }) {
   </form></div>;
 }
 
+function ProjectDialog({ onClose, onCreate }) {
+  const [name, setName] = useState('');
+  return <div className="dialog-backdrop" role="presentation"><div className="new-row-dialog" role="dialog" aria-modal="true" aria-label="Add project"><div className="dialog-title"><strong>Add project</strong><button onClick={onClose} aria-label="Close add project"><X size={16} /></button></div><label><span>Project name</span><input autoFocus value={name} onChange={(event) => setName(event.target.value)} placeholder="e.g. Phoenix Rollout" /></label><div className="dialog-actions"><button className="ghost-button" onClick={onClose}>Cancel</button><button className="primary-button" disabled={!name.trim()} onClick={() => onCreate(name.trim())}>Add project</button></div></div></div>;
+}
+
 function App() {
   const [activeProject, setActiveProject] = useState(initialParams.get('project') || 'all');
   const [activeNav, setActiveNav] = useState(initialParams.get('nav') || 'Schedule');
@@ -333,6 +338,8 @@ function App() {
   const [activeTool, setActiveTool] = useState('Arrow');
   const [lockedTool, setLockedTool] = useState(null);
   const [newRowOpen, setNewRowOpen] = useState(false);
+  const [extraProjects, setExtraProjects] = useState([]);
+  const [projectDialogOpen, setProjectDialogOpen] = useState(false);
   const [customRows, setCustomRows] = useState(() => { try { return JSON.parse(localStorage.getItem('projecttrack-custom-rows') || '[]'); } catch { return []; } });
   const [collapsedIds, setCollapsedIds] = useState(() => new Set());
   const [projectFiles, setProjectFiles] = useState(() => { try { return JSON.parse(localStorage.getItem('projecttrack-files') || JSON.stringify(defaultProjectFiles)); } catch { return defaultProjectFiles; } });
@@ -366,7 +373,11 @@ function App() {
   const showStatus = layout === 'Status Layout';
   const showFiles = ['Documents', 'Comments', 'Attachments'].includes(activeNav);
 
+  const availableProjects = [...projects, ...extraProjects];
+  const addProject = (name) => { const id = `project-${Date.now()}`; setExtraProjects((current) => [...current, { id, label: name, kind: 'project', status: 'On track' }]); setActiveProject(id); setProjectDialogOpen(false); setNotice(`${name} added`); };
   const action = (label) => {
+    if (label === 'Add project') { setProjectDialogOpen(true); return; }
+    if (label === 'Manage workspace') { setDialog({ title: 'Manage projects', fields: ['Project list', 'Select a project to inspect details'] }); return; }
     if (label === 'New row') { setNewRowOpen(true); return; }
     if (label === 'Save') { localStorage.setItem('projecttrack-last-save', 'projecttrack-risks', new Date().toISOString()); setNotice('Workspace saved locally'); return; }
     if (label === 'Open') { setNotice('Workspace restored from this browser'); return; }
@@ -387,7 +398,7 @@ function App() {
     </header>
 
     <nav className="workspace-tabs" aria-label="Project tabs">
-      <div className="tabs-left">{projects.map((project) => <button key={project.id} className={`workspace-tab ${activeProject === project.id ? 'active' : ''}`} onClick={() => { setActiveProject(project.id); setNotice(`${project.label} opened`); }}>{project.label}{project.id === 'all' && <span className="tab-count">{projects.length - 1}</span>}</button>)}<button className="add-tab" onClick={() => action('New project tab')}><Plus size={15} /></button></div>
+      <div className="tabs-left">{availableProjects.map((project) => <button key={project.id} className={`workspace-tab ${activeProject === project.id ? 'active' : ''}`} onClick={() => { setActiveProject(project.id); setNotice(`${project.label} opened`); }}>{project.label}{project.id === 'all' && <span className="tab-count">{projects.length - 1}</span>}</button>)}<button className="add-tab" onClick={() => action('New project tab')}><Plus size={15} /></button></div>
       <div className="workspace-tools"><button className="layout-picker" onClick={() => setLayoutGallery(true)}><Grid3X3 size={13} /><span>Layout</span><strong>{layout}</strong><ChevronDown size={13} /></button><div className="search-box"><Search size={15} /><input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Search workspace" /><kbd>Ctrl K</kbd>{query && <button onClick={() => setQuery('')}><X size={13} /></button>}</div></div>
     </nav>
 
@@ -417,7 +428,7 @@ function App() {
     {layoutGallery && <LayoutGallery current={layout} onSelect={(next) => { setLayout(next); setLayoutGallery(false); setNotice(`Layout ${next} applied`); }} onClose={() => setLayoutGallery(false)} />}
     {optionsOpen && <OptionsDialog onClose={() => setOptionsOpen(false)} />}
     {filterMenu && <FilterMenu current={filterName} onSelect={(next) => { setFilterName(next === 'Restore All' ? 'All Activities' : next); setFilterMenu(false); setNotice(`${next === 'Restore All' ? 'All activities' : next} filter applied`); }} onClose={() => setFilterMenu(false)} />}
-    {newRowOpen && <NewRowDialog projectId={activeProject} onClose={() => setNewRowOpen(false)} onCreate={createRow} />}
+    {projectDialogOpen && <ProjectDialog onClose={() => setProjectDialogOpen(false)} onCreate={addProject} />}\n    {newRowOpen && <NewRowDialog projectId={activeProject} onClose={() => setNewRowOpen(false)} onCreate={createRow} />}
     <footer className="statusbar"><div><span className="status-led" />{notice}</div><div className="status-center">Tool: {activeTool}{lockedTool ? ` · ${lockedTool} locked` : ''} · Filter: {filterName} · {filteredRows.length} rows · {projects.length - 1} projects · Last saved just now</div><div className="status-right"><span>Zoom {zoom}%</span><button onClick={() => setZoom(Math.max(60, zoom - 10))}>−</button><button onClick={() => setZoom(Math.min(160, zoom + 10))}>＋</button><span className="connection"><span className="status-led green" />Local workspace</span></div></footer>
   </div>;
 }
