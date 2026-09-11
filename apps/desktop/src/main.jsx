@@ -82,7 +82,7 @@ const timeline = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '1
 
 const navItems = [
   ['Schedule', Table2], ['Resource', Users], ['Calendar', CalendarDays], ['Reports', FileText],
-  ['Dashboard', LayoutDashboard], ['Documents', ClipboardList], ['Comments', MessageCircle], ['Attachments', Paperclip], ['Risks', AlertTriangle], ['Issues', CircleHelp]
+  ['Dashboard', LayoutDashboard], ['My Tasks', ClipboardList], ['Documents', ClipboardList], ['Comments', MessageCircle], ['Attachments', Paperclip], ['Risks', AlertTriangle], ['Issues', CircleHelp]
 ];
 
 const ribbonGroups = {
@@ -276,6 +276,15 @@ const defaultProjectFiles = [
   { id: 'doc-3', projectId: 'atlas', kind: 'document', name: 'Atlas validation notes.docx', meta: 'Validation · 840 KB' },
 ];
 
+function MyTasksView({ rows, notice, personalTasks, onAddTask }) {
+  const [task, setTask] = useState('');
+  const [section, setSection] = useState('All');
+  const linked = rows.filter((row) => row.type !== 'summary').slice(0, 14).map((row) => ({ id: `linked-${row.id}`, name: row.name, section: 'Project tasks', project: row.project || 'Project schedule', progress: row.progress, status: row.status }));
+  const allTasks = [...linked, ...personalTasks];
+  const visible = section === 'All' ? allTasks : allTasks.filter((item) => item.section === section);
+  return <section className="my-tasks-view"><div className="my-tasks-toolbar"><div><span className="eyebrow">PERSONAL WORKSPACE</span><h2>My Tasks</h2><p>Project assignments and personal tasks in one place.</p></div><label><span>Add a task</span><input value={task} onChange={(event) => setTask(event.target.value)} placeholder="Write a task…" onKeyDown={(event) => { if (event.key === 'Enter' && task.trim()) { onAddTask(task.trim()); setTask(''); } }} /></label></div><div className="task-tabs">{['All','Project tasks','Personal'].map((tab) => <button key={tab} className={section === tab ? 'active' : ''} onClick={() => setSection(tab)}>{tab} <span>{tab === 'All' ? allTasks.length : allTasks.filter((item) => item.section === tab).length}</span></button>)}</div><div className="task-board"><div className="task-section"><h3>My Tasks <span>{visible.length}</span></h3>{visible.map((item) => <article className="task-card" key={item.id}><button className="task-check" aria-label={`Complete ${item.name}`} onClick={() => onAddTask(item.name + ' · completed')}>○</button><div><strong>{item.name}</strong><span>{item.section}{item.project ? ` · ${item.project}` : ''}</span></div><em className={item.status === 'At risk' ? 'risk-text' : ''}>{item.status || 'Open'}</em></article>)}{visible.length === 0 && <div className="empty-files">No tasks in this tab yet.</div>}</div></div><div className="panel-note"><span className="note-icon"><ClipboardList size={14} /></span><div><strong>{notice}</strong><span>Add tasks with Enter, then classify them under Project tasks or Personal.</span></div></div></section>;
+}
+
 function ProjectFilesView({ projectId, mode, files, onAddFile, onAddComment, notice, globalQuery = '' }) {
   const [comment, setComment] = useState('');
   const [link, setLink] = useState('');
@@ -342,11 +351,13 @@ function App() {
   const [projectDialogOpen, setProjectDialogOpen] = useState(false);
   const [customRows, setCustomRows] = useState(() => { try { return JSON.parse(localStorage.getItem('projecttrack-custom-rows') || '[]'); } catch { return []; } });
   const [collapsedIds, setCollapsedIds] = useState(() => new Set());
+  const [personalTasks, setPersonalTasks] = useState(() => { try { return JSON.parse(localStorage.getItem('projecttrack-personal-tasks') || '[]'); } catch { return []; } });
   const [projectFiles, setProjectFiles] = useState(() => { try { return JSON.parse(localStorage.getItem('projecttrack-files') || JSON.stringify(defaultProjectFiles)); } catch { return defaultProjectFiles; } });
 
   useEffect(() => { localStorage.setItem('projecttrack-workspace', JSON.stringify({ layout, density, zoom, filterName })); }, [layout, density, zoom, filterName]);
   useEffect(() => { localStorage.setItem('projecttrack-custom-rows', JSON.stringify(customRows)); }, [customRows]);
   useEffect(() => { localStorage.setItem('projecttrack-files', JSON.stringify(projectFiles)); }, [projectFiles]);
+  useEffect(() => { localStorage.setItem('projecttrack-personal-tasks', JSON.stringify(personalTasks)); }, [personalTasks]);
 
   const scopedRows = useMemo(() => {
     const base = activeProject === 'all' ? allProjectRows : (projectRowsById[activeProject] || []);
@@ -372,6 +383,7 @@ function App() {
   const showCost = layout === 'Cost Layout';
   const showStatus = layout === 'Status Layout';
   const showFiles = ['Documents', 'Comments', 'Attachments'].includes(activeNav);
+  const showMyTasks = activeNav === 'My Tasks';
 
   const availableProjects = [...projects, ...extraProjects];
   const addProject = (name) => { const id = `project-${Date.now()}`; setExtraProjects((current) => [...current, { id, label: name, kind: 'project', status: 'On track' }]); setActiveProject(id); setProjectDialogOpen(false); setNotice(`${name} added`); };
@@ -419,9 +431,9 @@ function App() {
       </aside>
 
       <main className="main-content">
-        <div className="view-header"><div><div className="breadcrumb">{activeProject === 'all' ? 'ALL PROJECTS' : projects.find((p) => p.id === activeProject)?.label.toUpperCase()} <ChevronRight size={13} /> {activeNav.toUpperCase()}</div><h1>{showFiles || showDashboard || showReports ? activeNav : showCalendar ? 'Calendar' : showResource ? 'Resource planning' : 'Schedule'}</h1><p>{showFiles ? 'Project-scoped documents, links, comments and attachments.' : showDashboard ? 'Portfolio completion, schedule health and project momentum.' : showReports ? 'Visual status of delivery, completion and attention items.' : showCalendar ? 'Wall calendar projection across shared project weeks.' : showResource ? 'Resource load and assignment structure across the workspace.' : 'Plan, inspect and coordinate work across your project portfolio.'}</p></div><div className="view-actions"><button className="ghost-button" onClick={() => action('Refresh view')}><RefreshCw size={15} /> Refresh</button><button className="primary-button" onClick={() => action('New row')}><Plus size={15} /> New row</button></div></div>
+        <div className="view-header"><div><div className="breadcrumb">{activeProject === 'all' ? 'ALL PROJECTS' : projects.find((p) => p.id === activeProject)?.label.toUpperCase()} <ChevronRight size={13} /> {activeNav.toUpperCase()}</div><h1>{showMyTasks || showFiles || showDashboard || showReports ? activeNav : showCalendar ? 'Calendar' : showResource ? 'Resource planning' : 'Schedule'}</h1><p>{showMyTasks ? 'Personal and project tasks in one workspace.' : showFiles ? 'Project-scoped documents, links, comments and attachments.' : showDashboard ? 'Portfolio completion, schedule health and project momentum.' : showReports ? 'Visual status of delivery, completion and attention items.' : showCalendar ? 'Wall calendar projection across shared project weeks.' : showResource ? 'Resource load and assignment structure across the workspace.' : 'Plan, inspect and coordinate work across your project portfolio.'}</p></div><div className="view-actions"><button className="ghost-button" onClick={() => action('Refresh view')}><RefreshCw size={15} /> Refresh</button><button className="primary-button" onClick={() => action('New row')}><Plus size={15} /> New row</button></div></div>
         {mode === 'loading' ? <div className="state-panel"><RefreshCw size={25} className="spin" /><h2>Loading workspace</h2><p>Preparing the deterministic sample fixture…</p></div> : <>
-          {showFiles ? <ProjectFilesView projectId={activeProject} mode={activeNav} files={projectFiles} onAddFile={addProjectFile} onAddComment={addProjectComment} notice={notice} globalQuery={query} /> : showCost ? <CostLayoutView notice={notice} action={action} /> : showStatus ? <StatusLayoutView rows={filteredRows} notice={notice} /> : showDashboard ? <DashboardView rows={filteredRows} notice={notice} /> : showReports ? <ReportsView rows={filteredRows} notice={notice} /> : showCalendar ? <CalendarPlaceholder notice={notice} action={action} rows={filteredRows} projectLabel={activeProject === 'all' ? 'All Projects' : projects.find((p) => p.id === activeProject)?.label} /> : showResource ? <ResourcePlaceholder notice={notice} action={action} /> : <ScheduleView rows={visibleRows} leftWidth={leftWidth} setLeftWidth={setLeftWidth} density={density} setDensity={setDensity} zoom={zoom} setZoom={setZoom} outlineMode={outlineMode} setOutlineMode={(next) => { setOutlineMode(next); setExpanded(next !== 'compact'); }} action={action} notice={notice} activeTool={activeTool} onCreateBar={(day) => createBar({ projectId: activeProject, day })} onToggleCollapse={toggleCollapse} collapsedIds={collapsedIds} />}
+          {showMyTasks ? <MyTasksView rows={filteredRows} notice={notice} personalTasks={personalTasks} onAddTask={(name) => { setPersonalTasks((current) => [...current, { id: `personal-${Date.now()}`, name, section: 'Personal', status: 'Open' }]); setNotice('Personal task added'); }} /> : showFiles ? <ProjectFilesView projectId={activeProject} mode={activeNav} files={projectFiles} onAddFile={addProjectFile} onAddComment={addProjectComment} notice={notice} globalQuery={query} /> : showCost ? <CostLayoutView notice={notice} action={action} /> : showStatus ? <StatusLayoutView rows={filteredRows} notice={notice} /> : showDashboard ? <DashboardView rows={filteredRows} notice={notice} /> : showReports ? <ReportsView rows={filteredRows} notice={notice} /> : showCalendar ? <CalendarPlaceholder notice={notice} action={action} rows={filteredRows} projectLabel={activeProject === 'all' ? 'All Projects' : projects.find((p) => p.id === activeProject)?.label} /> : showResource ? <ResourcePlaceholder notice={notice} action={action} /> : <ScheduleView rows={visibleRows} leftWidth={leftWidth} setLeftWidth={setLeftWidth} density={density} setDensity={setDensity} zoom={zoom} setZoom={setZoom} outlineMode={outlineMode} setOutlineMode={(next) => { setOutlineMode(next); setExpanded(next !== 'compact'); }} action={action} notice={notice} activeTool={activeTool} onCreateBar={(day) => createBar({ projectId: activeProject, day })} onToggleCollapse={toggleCollapse} collapsedIds={collapsedIds} />}
         </>}
       </main>
     </div>
